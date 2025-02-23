@@ -15,6 +15,12 @@ module alu (
     output wire alu_overflow
 );
 
+
+//add, addi, addiu, addu, and, andi, beq, bgez, bgtz,
+//blez, bltz, bne, j, jal, jalr, jr, lb, lbu, lh, ll, lui, lw, movn, movz, mul, nor, or, ori, sb, sc, sh, sll,
+//sllv, slt, slti, sltiu, sltu, sra, srav, srl, srlv, sub, subu, sw, xor, xori
+
+
 //******************************************************************************
 // Shift operation: ">>>" will perform an arithmetic shift, but the operand
 // must be reg signed, also useful for signed vs. unsigned comparison.
