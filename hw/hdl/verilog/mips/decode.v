@@ -7,8 +7,8 @@
 `include "mips_defines.v"
 
 module decode (
-    input [31:0] pc,
-    input [31:0] instr,
+    input [31:0] pc,          // program counter for next instruction
+    input [31:0] instr,       // current instructions program counter, used to compute return address
     input [31:0] rs_data_in,
     input [31:0] rt_data_in,
 
@@ -24,6 +24,7 @@ module decode (
     output wire [31:0] mem_write_data,
     output wire mem_read,
     output wire mem_byte,
+    output wire mem_halfword_ex,        //ADDED BY GRAHAM for SH instruction only
     output wire mem_signextend,
     output wire reg_we,
     output wire movn,
@@ -46,6 +47,26 @@ module decode (
     input [4:0] reg_write_addr_mem,
     input [31:0] reg_write_data_mem
 );
+
+
+//DONE BY GRAHAM
+//  - For jr and jalr: 
+//      - Have set jr_pc to rs_data in decode
+//      - set stall = 1 if isJumpReg
+//      - pass jr_pc to IF stage
+//      - update pc = jr_pc if isJumpReg in IF stage
+//  - for jal and jalr:
+//      - have set reg_write_addr to either $ra or $rd
+//      - have set alu_op_x to return_address (cur_pc + 8)
+//      - have passed cur_pc from IF to ID stage
+//      - have ensured that reg write is enabled
+//      - with the proper reg_we and reg_write_addr, the writeback stage will handle the rest
+//  - j already implemented
+//  ___________________________
+//  - Added zero extension for relevant I-type instructions
+//  - updated alu_op_y to use zero extended immediates
+//  - added alu_opcode decodes and alu operations for XOR, XORI, 
+
 
 //******************************************************************************
 // instruction field
@@ -81,6 +102,9 @@ module decode (
 //******************************************************************************
 
     wire isJ    = (op == `J);
+    wire isJAL  = (op == `JAL);                         //ADDED BY GRAHAM
+    wire isJR   = (op == `SPECIAL) & (funct == `JR);    //ADDED BY GRAHAM
+    wire isJALR = (op == `SPECIAL) & (funct == `JALR);  //ADDED BY GRAHAM
 
 //******************************************************************************
 // shift instruction decode
@@ -127,6 +151,14 @@ module decode (
             {`SPECIAL, `SRL}:   alu_opcode = `ALU_SRL;
             {`SPECIAL, `SLLV}:  alu_opcode = `ALU_SLL;
             {`SPECIAL, `SRLV}:  alu_opcode = `ALU_SRL;
+
+            
+            {`SPECIAL, `XOR}:   alu_opcode = `ALU_XOR;  //ADDED BY GRAHAM
+            {`XORI, `DC6}:      alu_opcode = `ALU_XOR;  //ADDED BY GRAHAM
+            {`SPECIAL, `SRAV}:  alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
+            {`SPECIAL, `SRA}:   alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
+            {`SH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM  
+
             // compare rs data to 0, only care about 1 operand
             {`BGTZ, `DC6}:      alu_opcode = `ALU_PASSX;
             {`BLEZ, `DC6}:      alu_opcode = `ALU_PASSX;
@@ -150,11 +182,14 @@ module decode (
 //******************************************************************************
 
     wire use_imm = &{op != `SPECIAL, op != `SPECIAL2, op != `BNE, op != `BEQ}; // where to get 2nd ALU operand from: 0 for RtData, 1 for Immediate
+    wire isZeroExtended = |{(op == `ANDI), (op == `ORI), (op == `XORI), (op == `SLTIU)}; //ADDED BY GRAHAM
+
 
     wire [31:0] imm_sign_extend = {{16{immediate[15]}}, immediate};
+    wire [31:0] imm_zero_extend = {16'b0, immediate};              //ADDED BY GRAHAM
     wire [31:0] imm_upper = {immediate, 16'b0};
 
-    wire [31:0] imm = (op == `LUI) ? imm_upper : imm_sign_extend;
+    wire [31:0] imm = (op == `LUI) ? imm_upper : (isZeroExtended ? imm_zero_extend : imm_sign_extend); //EDITED BY GRAHAM
 
 //******************************************************************************
 // forwarding and stalling logic
@@ -173,10 +208,23 @@ module decode (
     wire isALUImm = |{op == `ADDI, op == `ADDIU, op == `SLTI, op == `SLTIU, op == `ANDI, op == `ORI};
     wire read_from_rt = ~|{isLUI, jump_target, isALUImm, mem_read};
 
-    assign stall = rs_mem_dependency & read_from_rs;
+    wire isJumpReg = isJR || isJALR;                                 //ADDED BY GRAHAM
+
+    assign stall = (rs_mem_dependency & read_from_rs) || isJumpReg;  //EDITED BY GRAHAM
+
+    // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
+    wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
+    // Forward from EX stage if applicable 
+    wire forward_rt_ex = (rt_addr == reg_write_addr_ex) && (rt_addr != `ZERO) && reg_we_ex;  //ADDED BY GRAHAM
+
+
+    assign mem_halfword_ex = (op == `SH); //ADDED BY GRAHAM
 
     assign jr_pc = rs_data;
-    assign mem_write_data = rt_data;
+    
+    assign mem_write_data = forward_rt_ex ? alu_result_ex :  //EDITED BY GRAHAM
+                            forward_rt_mem ? reg_write_data_mem :
+                            rt_data_in;
 
 //******************************************************************************
 // Determine ALU inputs and register writeback address
@@ -186,18 +234,27 @@ module decode (
     // otherwise use rs
 
     wire [31:0] shift_amount = isShiftImm ? shamt : rs_data[4:0];
-    assign alu_op_x = isShift ? shift_amount : rs_data;
+    
+    assign alu_op_x = (isJAL || isJALR) ? (cur_pc + 32'd8) :    //EDITED BY GRAHAM
+                      isShift ? shift_amount : 
+                      rs_data;
 
     // for link operations, use next pc (current pc + 8)
     // for immediate operations, use Imm
     // otherwise use rt
 
+    wire [4:0] ra_addr = 5'd31;  // ADDED BY GRAHAM, $ra (return address register)
+
     assign alu_op_y = (use_imm) ? imm : rt_data;
-    assign reg_write_addr = (use_imm) ? rt_addr : rd_addr;
+    
+    assign reg_write_addr = (isJAL) ? ra_addr : //EDITED BY GRAHAM
+                            (isJALR) ? rd_addr :
+                            (use_imm) ? rt_addr :
+                            rd_addr;
 
     // determine when to write back to a register (any operation that isn't an
     // unconditional store, non-linking branch, or non-linking jump)
-    assign reg_we = ~|{(mem_we & (op != `SC)), isJ, isBGEZNL, isBGTZ, isBLEZ, isBLTZNL, isBNE, isBEQ};
+    assign reg_we = ~|{(mem_we & (op != `SC)), isJ, isBGEZNL, isBGTZ, isBLEZ, isBLTZNL, isBNE, isBEQ}; //NO CHANGE NEEDED HERE
 
     // determine whether a register write is conditional
     assign movn = &{op == `SPECIAL, funct == `MOVN};
@@ -207,7 +264,7 @@ module decode (
 // Memory control
 //******************************************************************************
     assign mem_we = |{op == `SW, op == `SB, op == `SC};    // write to memory
-    assign mem_read = 1'b0;                     // use memory data for writing to a register
+    assign mem_read = |{op == `LB, op == `LBU, op == `LL, op == `LH, op == `LW};  //EDITED BY GRAHAM
     assign mem_byte = |{op == `SB, op == `LB, op == `LBU};    // memory operations use only one byte
     assign mem_signextend = ~|{op == `LBU};     // sign extend sub-word memory reads
 
@@ -232,6 +289,6 @@ module decode (
                            isBNE & ~isEqual};
 
     assign jump_target = isJ;
-    assign jump_reg = 1'b0;
+    assign jump_reg = isJumpReg;   //EDITED BY GRAHAM
 
 endmodule

@@ -16,9 +16,9 @@ module alu (
 );
 
 
-//add, addi, addiu, addu, and, andi, beq, bgez, bgtz,
-//blez, bltz, bne, j, jal, jalr, jr, lb, lbu, lh, ll, lui, lw, movn, movz, mul, nor, or, ori, sb, sc, sh, sll,
-//sllv, slt, slti, sltiu, sltu, sra, srav, srl, srlv, sub, subu, sw, xor, xori
+//add-DONE, addi, addiu, addu-DONE, and-DONE, andi, beq, bgez, bgtz,
+// blez, bltz, bne, j-DONE, jal-DONE, jalr-DONE, jr-DONE, lb, lbu, lh, ll, lui, lw, movn, movz, mul, nor, or-DONE, ori, sb, sc, sh-DONE, sll-DONE,
+// sllv-DONE, slt-DONE, slti-DONE, sltiu-DONE, sltu-DONE, sra-DONE, srav-DONE, srl-DONE, srlv-DONE, sub-DONE, subu-DONE, sw-DONE, xor-DONE, xori-DONE
 
 
 //******************************************************************************
@@ -35,16 +35,19 @@ module alu (
     always @* begin
         case (alu_opcode)
             // PERFORM ALU OPERATIONS DEFINED ABOVE
-            `ALU_ADD:   alu_result = alu_op_x + alu_op_y;
+            `ALU_ADD:   alu_result = alu_op_x_signed + alu_op_y_signed;  //EDITED BY GRAHAM, previously unsigned
             `ALU_ADDU:  alu_result = alu_op_x + alu_op_y;
             `ALU_AND:   alu_result = alu_op_x & alu_op_y;
             `ALU_OR:    alu_result = alu_op_x | alu_op_y;
-            `ALU_SUB:   alu_result = alu_op_x - alu_op_y;
+            `ALU_SUB:   alu_result = alu_op_x_signed - alu_op_y_signed; //EDITED BY GRAHAM, previously unsigned
             `ALU_SUBU:  alu_result = alu_op_x - alu_op_y;
             `ALU_SLTU:  alu_result = alu_op_x < alu_op_y;
             `ALU_SLT:   alu_result = alu_op_x_signed < alu_op_y_signed;
-            `ALU_SRL:   alu_result = alu_op_y >> alu_op_x[4:0]; // shift operations are Y >> X
+            `ALU_SRL:   alu_result = alu_op_y >> alu_op_x[4:0];       // shift operations are Y >> X
             `ALU_SLL:   alu_result = alu_op_y << alu_op_x[4:0];
+            `ALU_XOR:   alu_result = alu_op_x ^ alu_op_y;             //ADDED BY GRAHAM
+            `ALU_SRA: alu_result = alu_op_x_signed >>> alu_op_y;      //ADDED BY GRAHAM
+
             `ALU_PASSX: alu_result = alu_op_x;
             `ALU_PASSY: alu_result = alu_op_y;
             default:    alu_result = 32'hxxxxxxxx;   // undefined

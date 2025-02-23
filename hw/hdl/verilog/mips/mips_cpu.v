@@ -19,6 +19,8 @@ module mips_cpu (
 );
 
     wire [31:0] pc_if, pc_id;
+    wire [31:0] cur_pc_if, cur_pc_id; //ADDED BY GRAHAM
+    wire mem_halfword_ex;             //ADDED BY GRAHAM
     wire [31:0] instr_sav;
     wire [31:0] instr_id;
     wire jump_branch_id, jump_target_id, jump_reg_id;
@@ -54,15 +56,20 @@ module mips_cpu (
         .rst            (rst),
         .en             (en_if),
         .jump_target    (jump_target_id),
+        .jump_reg       (jump_reg_id),     // ADDED BY GRAHAM, Signal for register jumps (jr/jalr)
+        .jr_pc_if       (jr_pc_id),        // ADDED BY GRAHAM, Pass the jump address from the Decode stage
         .pc_id          (pc_id),
         .instr_id       (instr_id[25:0]),
         .pc             (pc_if)
+        .cur_pc_id_out  (cur_pc_if)        // ADDED BY GRAHAM
     );
 
     assign pc = pc_if; // output pc to parent module
 
     // needed for D stage
     dffare #(32) pc_if2id (.clk(clk), .r(rst), .en(en_if), .d(pc_if), .q(pc_id));
+
+    dffare #(32) cur_pc_if2id (.clk(clk), .r(rst), .en(en_if), .d(cur_pc_if), .q(cur_pc_id)); //ADDED BY GRAHAM
 
     // Saved ID instruction after a stall
     dffare #(32) instr_sav_dff (.clk(clk), .r(rst), .en(en), .d(instr), .q(instr_sav));
@@ -74,6 +81,7 @@ module mips_cpu (
     decode d_stage (
         // inputs
         .pc                 (pc_id),
+        .cur_pc             (cur_pc_id), //ADDED BY GRAHAM
         .instr              (instr_id),
         .rs_data_in         (rs_data_id),
         .rt_data_in         (rt_data_id),
@@ -90,6 +98,7 @@ module mips_cpu (
         .mem_write_data     (mem_write_data_id),
         .mem_read           (mem_read_id),
         .mem_byte           (mem_byte_id),
+        .mem_halfword_ex    (mem_halfword_ex), //ADDED BY GRAHAM
         .mem_signextend     (mem_signextend_id),
         .reg_we             (reg_we_id),
         .movn               (movn_id),
