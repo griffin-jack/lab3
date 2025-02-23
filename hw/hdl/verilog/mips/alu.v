@@ -16,9 +16,52 @@ module alu (
 );
 
 
-//add-DONE, addi, addiu, addu-DONE, and-DONE, andi, beq, bgez, bgtz,
-// blez, bltz, bne, j-DONE, jal-DONE, jalr-DONE, jr-DONE, lb, lbu, lh, ll, lui, lw, movn, movz, mul, nor, or-DONE, ori, sb, sc, sh-DONE, sll-DONE,
-// sllv-DONE, slt-DONE, slti-DONE, sltiu-DONE, sltu-DONE, sra-DONE, srav-DONE, srl-DONE, srlv-DONE, sub-DONE, subu-DONE, sw-DONE, xor-DONE, xori-DONE
+// add   - DONE
+// addi  - 
+// addiu - 
+// addu  - DONE
+// and   - DONE
+// andi  - 
+// beq   - 
+// bgez  - 
+// bgtz  - 
+// blez  - 
+// bltz  - 
+// bne   - 
+// j     - DONE
+// jal   - DONE
+// jalr  - DONE
+// jr    - DONE
+// lb    - 
+// lbu   - 
+// lh    - 
+// ll    - 
+// lui   - 
+// lw    - 
+// movn  - 
+// movz  - 
+// mul   - 
+// nor   - 
+// or    - DONE
+// ori   - 
+// sb    - 
+// sc    - 
+// sh    - DONE
+// sll   - DONE
+// sllv  - DONE
+// slt   - DONE
+// slti  - DONE
+// sltiu - DONE
+// sltu  - DONE
+// sra   - DONE
+// srav  - DONE
+// srl   - DONE
+// srlv  - DONE
+// sub   - DONE, VERIFIED
+// subu  - DONE
+// sw    - DONE
+// xor   - DONE
+// xori  - DONE
 
 
 //******************************************************************************
