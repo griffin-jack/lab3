@@ -15,7 +15,7 @@ module instruction_fetch (
     input [31:0] pc_id,
     input [25:0] instr_id,  // Lower 26 bits of the instruction
 
-    output [31:0] cur_pc_id_out  // ADDED BY GRAHAM, Pass the current PC to the decode stage, needed for jal & jalr to compute return address (cur_pc + 8)
+    output [31:0] cur_pc_id_out,  // ADDED BY GRAHAM, Pass the current PC to the decode stage, needed for jal & jalr to compute return address (cur_pc + 8)
     output [31:0] pc
 );
 

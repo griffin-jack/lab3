@@ -40,6 +40,8 @@
 `define SB    6'b101000
 `define SC    6'b111000
 `define SW    6'b101011
+`define SH    6'b101001  //ADDED BY GRAHAM
+`define LH    6'b100001  //ADDED BY GRAHAM
 
 // FUNCTION CODES (more are above for shifts)
 `define ADD   6'b100000

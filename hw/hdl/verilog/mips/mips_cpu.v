@@ -60,7 +60,7 @@ module mips_cpu (
         .jr_pc_if       (jr_pc_id),        // ADDED BY GRAHAM, Pass the jump address from the Decode stage
         .pc_id          (pc_id),
         .instr_id       (instr_id[25:0]),
-        .pc             (pc_if)
+        .pc             (pc_if),
         .cur_pc_id_out  (cur_pc_if)        // ADDED BY GRAHAM
     );
 
