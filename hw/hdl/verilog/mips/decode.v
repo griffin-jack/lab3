@@ -182,15 +182,25 @@ module decode (
 // Compute value for 32 bit immediate data
 //******************************************************************************
 
-    wire use_imm = &{op != `SPECIAL, op != `SPECIAL2, op != `BNE, op != `BEQ}; // where to get 2nd ALU operand from: 0 for RtData, 1 for Immediate
-    wire isZeroExtended = |{(op == `ANDI), (op == `ORI), (op == `XORI), (op == `SLTIU)}; //ADDED BY GRAHAM
+    //**** DON'T EDIT, THIS IS WORKING
 
+    // all immediates are sign-extended except for:
+    //  - logical instructions (andi, ori, xori)
+    //  - lui, which shifts immediate into upper 16 bits
+
+    
+    wire use_imm = &{op != `SPECIAL, op != `SPECIAL2, op != `BNE, op != `BEQ}; // where to get 2nd ALU operand from: 0 for RtData, 1 for Immediate
+    wire isLogicalInstr = |{(op == `ANDI), (op == `ORI), (op == `XORI)};       //ADDED BY GRAHAM
+    wire isLUI = op == `LUI;                                                   //ADDED BY GRAHAM
 
     wire [31:0] imm_sign_extend = {{16{immediate[15]}}, immediate};
-    wire [31:0] imm_zero_extend = {16'b0, immediate};              //ADDED BY GRAHAM
+    wire [31:0] imm_zero_extend = {16'b0, immediate};                          //ADDED BY GRAHAM
     wire [31:0] imm_upper = {immediate, 16'b0};
 
-    wire [31:0] imm = (op == `LUI) ? imm_upper : (isZeroExtended ? imm_zero_extend : imm_sign_extend); //EDITED BY GRAHAM
+    wire [31:0] imm = isLUI ? imm_upper :                                      //EDITED BY GRAHAM
+                isLogicalInstr ? imm_zero_extend : 
+                imm_sign_extend; 
+
 
 //******************************************************************************
 // forwarding and stalling logic
