@@ -8,6 +8,7 @@
 
 module decode (
     input [31:0] pc,          // program counter for next instruction
+    input [31:0] cur_pc,      //ADDED BY GRAHAM
     input [31:0] instr,       // current instructions program counter, used to compute return address
     input [31:0] rs_data_in,
     input [31:0] rt_data_in,
