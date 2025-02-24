@@ -15,6 +15,7 @@ module decode (
 
     output wire [4:0] reg_write_addr,
     output wire jump_branch,
+    output wire [31:0] jump_addr, //ADDED BY GRAHAM
     output wire jump_target,
     output wire jump_reg,
     output wire [31:0] jr_pc,
@@ -36,7 +37,6 @@ module decode (
     input  atomic_ex,
     output wire mem_sc_mask_id,
     output wire mem_sc_id,
-
     output wire stall,
 
     input reg_we_ex,
@@ -160,6 +160,8 @@ module decode (
             {`SPECIAL, `SRAV}:  alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SPECIAL, `SRA}:   alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM  
+            {`SPECIAL, `NOR}:   alu_opcode = `ALU_NOR;  //ADDED BY GRAHAM
+            {`SPECIAL, `MUL}:   alu_opcode = `ALU_MUL;  //ADDED BY GRAHAM
 
             // compare rs data to 0, only care about 1 operand
             {`BGTZ, `DC6}:      alu_opcode = `ALU_PASSX;
@@ -220,7 +222,7 @@ module decode (
 
     wire isJumpReg = isJR || isJALR;                                 //ADDED BY GRAHAM
 
-    assign stall = (rs_mem_dependency & read_from_rs) || isJumpReg || isJ;  //EDITED BY GRAHAM
+    assign stall = (rs_mem_dependency & read_from_rs) || isJumpReg;  //EDITED BY GRAHAM
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
@@ -293,12 +295,22 @@ module decode (
 // Branch resolution
 //******************************************************************************
 
+
+    //ALSO PART OF DECODE MODULE
+
     wire isEqual = rs_data == rt_data;
 
     assign jump_branch = |{isBEQ & isEqual,
                            isBNE & ~isEqual};
 
+    wire [31:0] pc_plus_4 = pc + 32'd4;
+    wire [31:0] j_target  = {pc_plus_4[31:28], instr[25:0], 2'b0};
+
     assign jump_target = isJ || isJAL; //EDITED BY GRAHAM, added isJAL
+
+    assign jump_addr = jump_target ? j_target : 32'b0;
+
+    
     assign jump_reg = isJumpReg;   //EDITED BY GRAHAM
 
 endmodule

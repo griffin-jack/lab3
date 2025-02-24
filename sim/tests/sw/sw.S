@@ -1,14 +1,15 @@
 ###############################################################################
-# File         : ori.S
+# File         : sub.S
 # Project      : EE180 Lab 2: MIPS
 #
 # Standards/Formatting:
 #   MIPS gas, soft tab, 80 column
 #
 # Description:
-#   Test the functionality of the 'ori' instruction.
+#   Test the functionality of the 'sub' instruction.
 #
 ###############################################################################
+
 
     .section .boot, "x"
     .balign 4
@@ -23,6 +24,5 @@ boot:
 
 $done:
     j       $done
-    nop
 
     .end boot

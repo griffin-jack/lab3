@@ -16,11 +16,11 @@ module alu (
 );
 
 
-// add   - DONE
-// addi  - 
-// addiu - 
-// addu  - DONE
-// and   - DONE
+// add   - DONE, VERIFIED with more robust test
+// addi  - DONE, VERIFIED with more robust test
+// addiu - DONE, VERIFIED with more robust test
+// addu  - DONE, VERIFIED with more robust test
+// and   - DONE, VERIFIED with more robust test
 // andi  - 
 // beq   - 
 // bgez  - 
@@ -36,17 +36,17 @@ module alu (
 // lbu   - 
 // lh    - 
 // ll    - 
-// lui   - 
-// lw    - 
-// movn  - 
-// movz  - 
-// mul   - 
-// nor   - 
-// or    - DONE
-// ori   - DONE, VERIFIED by use in other test case
+// lui   - DONE, VERIFIED
+// lw    - DONE, VERIFIED
+// movn  - DONE, VERIFIED
+// movz  - DONE, VERIFIED
+// mul   - DONE, failing tests
+// nor   - DONE, failing tests
+// or    - DONE, VERIFIED
+// ori   - DONE, VERIFIED 
 // sb    - 
 // sc    - 
-// sh    - DONE
+// sh    - DONE, failing tests
 // sll   - DONE, VERIFIED
 // sllv  - DONE, VERIFIED
 // slt   - DONE, VERIFIED
@@ -59,7 +59,7 @@ module alu (
 // srlv  - DONE, VERIFIED
 // sub   - DONE, VERIFIED with more robust test
 // subu  - DONE, VERIFIED with more robust test
-// sw    - DONE
+// sw    - DONE, VERIFIED
 // xor   - DONE, VERIFIED with more robust test
 // xori  - DONE, VERIFIED with more robust test
 
@@ -90,6 +90,8 @@ module alu (
             `ALU_SLL:   alu_result = alu_op_y << alu_op_x;
             `ALU_XOR:   alu_result = alu_op_x ^ alu_op_y;             //ADDED BY GRAHAM
             `ALU_SRA:   alu_result = alu_op_y_signed >>> alu_op_x;      //ADDED BY GRAHAM
+            `ALU_NOR:   alu_result = ~(alu_op_x | alu_op_y);      //ADDED BY GRAHAM
+            `ALU_MUL:   alu_result = alu_op_x_signed * alu_op_y_signed;      //ADDED BY GRAHAM
 
             `ALU_PASSX: alu_result = alu_op_x;
             `ALU_PASSY: alu_result = alu_op_y;
