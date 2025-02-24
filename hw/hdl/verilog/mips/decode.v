@@ -220,7 +220,7 @@ module decode (
 
     wire isJumpReg = isJR || isJALR;                                 //ADDED BY GRAHAM
 
-    assign stall = (rs_mem_dependency & read_from_rs) || isJumpReg;  //EDITED BY GRAHAM
+    assign stall = (rs_mem_dependency & read_from_rs) || isJumpReg || isJ;  //EDITED BY GRAHAM
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
@@ -264,7 +264,7 @@ module decode (
 
     // determine when to write back to a register (any operation that isn't an
     // unconditional store, non-linking branch, or non-linking jump)
-    assign reg_we = ~|{(mem_we & (op != `SC)), isJ, isBGEZNL, isBGTZ, isBLEZ, isBLTZNL, isBNE, isBEQ}; //NO CHANGE NEEDED HERE
+    assign reg_we = ~|{(mem_we & (op != `SC)), isJ, isJR, isBGEZNL, isBGTZ, isBLEZ, isBLTZNL, isBNE, isBEQ}; //EDITED BY GRAHAM, added isJR
 
     // determine whether a register write is conditional
     assign movn = &{op == `SPECIAL, funct == `MOVN};
@@ -298,7 +298,7 @@ module decode (
     assign jump_branch = |{isBEQ & isEqual,
                            isBNE & ~isEqual};
 
-    assign jump_target = isJ;
+    assign jump_target = isJ || isJAL; //EDITED BY GRAHAM, added isJAL
     assign jump_reg = isJumpReg;   //EDITED BY GRAHAM
 
 endmodule

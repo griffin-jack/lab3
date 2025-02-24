@@ -25,12 +25,15 @@ module instruction_fetch (
 
                                                        // EDITED BY GRAHAM
     wire [31:0] pc_next = (jump_target) ? j_addr :     // For j, jal
-                          (jump_reg    ? jr_pc_if :   // For jr, jalr (use register value) forwarded from decode stage
+                          (jump_reg     ? jr_pc_if :   // For jr, jalr (use register value) forwarded from decode stage
                           pc_id_p4);                    // Next sequential instruction
 
 
     assign cur_pc_id_out = pc;   //passes the current pc through to ID stage to compute return address for jal & jalr
 
     dffare #(32) pc_reg (.clk(clk), .r(rst), .en(en), .d(pc_next), .q(pc));
+
+
+    //cur pc stuff is for jal and jalr, focus on j and jr for now
 
 endmodule

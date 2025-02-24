@@ -48,20 +48,20 @@ module alu (
 // sc    - 
 // sh    - DONE
 // sll   - DONE, VERIFIED
-// sllv  - DONE
-// slt   - DONE
+// sllv  - DONE, VERIFIED
+// slt   - DONE, VERIFIED
 // slti  - DONE, VERIFIED with more robust test
 // sltiu - DONE, VERIFIED with more robust test
 // sltu  - DONE, VERIFIED with more robust test
 // sra   - DONE, VERIFIED with more robust test
-// srav  - DONE
+// srav  - DONE, VERIFIED
 // srl   - DONE, VERIFIED with more robust test
-// srlv  - DONE
+// srlv  - DONE, VERIFIED
 // sub   - DONE, VERIFIED with more robust test
 // subu  - DONE, VERIFIED with more robust test
 // sw    - DONE
-// xor   - DONE, VERIFIED by use in other test case
-// xori  - DONE
+// xor   - DONE, VERIFIED with more robust test
+// xori  - DONE, VERIFIED with more robust test
 
 
 //******************************************************************************
