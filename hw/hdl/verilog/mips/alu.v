@@ -28,7 +28,7 @@ module alu (
 // blez  - 
 // bltz  - 
 // bne   - 
-// j     - DONE
+// j     - DONE, partially verified (no nop after j in tests)
 // jal   - DONE
 // jalr  - DONE
 // jr    - DONE
@@ -43,24 +43,24 @@ module alu (
 // mul   - 
 // nor   - 
 // or    - DONE
-// ori   - 
+// ori   - DONE, VERIFIED by use in other test case
 // sb    - 
 // sc    - 
 // sh    - DONE
-// sll   - DONE
+// sll   - DONE, VERIFIED
 // sllv  - DONE
 // slt   - DONE
 // slti  - DONE, VERIFIED with more robust test
 // sltiu - DONE, VERIFIED with more robust test
-// sltu  - DONE
-// sra   - DONE
+// sltu  - DONE, VERIFIED with more robust test
+// sra   - DONE, VERIFIED with more robust test
 // srav  - DONE
-// srl   - DONE
+// srl   - DONE, VERIFIED with more robust test
 // srlv  - DONE
-// sub   - DONE, VERIFIED
-// subu  - DONE
+// sub   - DONE, VERIFIED with more robust test
+// subu  - DONE, VERIFIED with more robust test
 // sw    - DONE
-// xor   - DONE
+// xor   - DONE, VERIFIED by use in other test case
 // xori  - DONE
 
 
@@ -86,10 +86,10 @@ module alu (
             `ALU_SUBU:  alu_result = alu_op_x - alu_op_y;
             `ALU_SLTU:  alu_result = alu_op_x < alu_op_y;
             `ALU_SLT:   alu_result = alu_op_x_signed < alu_op_y_signed;
-            `ALU_SRL:   alu_result = alu_op_y >> alu_op_x[4:0];       // shift operations are Y >> X
-            `ALU_SLL:   alu_result = alu_op_y << alu_op_x[4:0];
+            `ALU_SRL:   alu_result = alu_op_y >> alu_op_x;       // shift operations are Y >> X
+            `ALU_SLL:   alu_result = alu_op_y << alu_op_x;
             `ALU_XOR:   alu_result = alu_op_x ^ alu_op_y;             //ADDED BY GRAHAM
-            `ALU_SRA: alu_result = alu_op_x_signed >>> alu_op_y;      //ADDED BY GRAHAM
+            `ALU_SRA:   alu_result = alu_op_y_signed >>> alu_op_x;      //ADDED BY GRAHAM
 
             `ALU_PASSX: alu_result = alu_op_x;
             `ALU_PASSY: alu_result = alu_op_y;

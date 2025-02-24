@@ -113,10 +113,11 @@ module decode (
 
     wire isSLL = (op == `SPECIAL) & (funct == `SLL);
     wire isSRL = (op == `SPECIAL) & (funct == `SRL);
+    wire isSRA = (op == `SPECIAL) & (funct == `SRA);
     wire isSLLV = (op == `SPECIAL) & (funct == `SLLV);
     wire isSRLV = (op == `SPECIAL) & (funct == `SRLV);
 
-    wire isShiftImm = isSLL | isSRL;
+    wire isShiftImm = isSLL | isSRL | isSRA;
     wire isShift = isShiftImm | isSLLV | isSRLV;
 
 //******************************************************************************
