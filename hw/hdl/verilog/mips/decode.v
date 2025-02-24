@@ -198,8 +198,7 @@ module decode (
     wire [31:0] imm_upper = {immediate, 16'b0};
 
     wire [31:0] imm = isLUI ? imm_upper :                                      //EDITED BY GRAHAM
-                isLogicalInstr ? imm_zero_extend : 
-                imm_sign_extend; 
+                (isLogicalInstr ? imm_zero_extend : imm_sign_extend); 
 
 
 //******************************************************************************
@@ -213,7 +212,6 @@ module decode (
 
     wire rs_mem_dependency = &{rs_addr == reg_write_addr_ex, mem_read_ex, rs_addr != `ZERO};
 
-    wire isLUI = op == `LUI;
     wire read_from_rs = ~|{isLUI, jump_target, isShiftImm};
 
     wire isALUImm = |{op == `ADDI, op == `ADDIU, op == `SLTI, op == `SLTIU, op == `ANDI, op == `ORI};

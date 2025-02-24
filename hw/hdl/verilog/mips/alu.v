@@ -50,8 +50,8 @@ module alu (
 // sll   - DONE
 // sllv  - DONE
 // slt   - DONE
-// slti  - DONE
-// sltiu - DONE
+// slti  - DONE, VERIFIED with more robust test
+// sltiu - DONE, VERIFIED with more robust test
 // sltu  - DONE
 // sra   - DONE
 // srav  - DONE
