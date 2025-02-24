@@ -21,7 +21,7 @@ module alu (
 // addiu - DONE, VERIFIED with more robust test
 // addu  - DONE, VERIFIED with more robust test
 // and   - DONE, VERIFIED with more robust test
-// andi  - 
+// andi  - DONE, VERIFIED with more robust test
 // beq   - 
 // bgez  - 
 // bgtz  - 
@@ -32,8 +32,8 @@ module alu (
 // jal   - DONE
 // jalr  - DONE
 // jr    - DONE
-// lb    - 
-// lbu   - 
+// lb    - DONE, VERIFIED
+// lbu   - DONE, VERIFIED
 // lh    - 
 // ll    - 
 // lui   - DONE, VERIFIED
@@ -44,9 +44,9 @@ module alu (
 // nor   - DONE, failing tests
 // or    - DONE, VERIFIED
 // ori   - DONE, VERIFIED 
-// sb    - 
+// sb    - DONE, VERIFIED
 // sc    - 
-// sh    - DONE, failing tests
+// sh    - DONE, VERIFIED
 // sll   - DONE, VERIFIED
 // sllv  - DONE, VERIFIED
 // slt   - DONE, VERIFIED

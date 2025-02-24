@@ -27,6 +27,7 @@ module decode (
     output wire mem_read,
     output wire mem_byte,
     output wire mem_halfword_ex,        //ADDED BY GRAHAM for SH instruction only
+    output wire mem_halfword_load,
     output wire mem_signextend,
     output wire reg_we,
     output wire movn,
@@ -231,6 +232,7 @@ module decode (
 
 
     assign mem_halfword_ex = (op == `SH); //ADDED BY GRAHAM
+    assign mem_halfword_load = (op == `LH); //ADDED BY GRAHAM
 
     assign jr_pc = rs_data;
     
@@ -275,7 +277,7 @@ module decode (
 //******************************************************************************
 // Memory control
 //******************************************************************************
-    assign mem_we = |{op == `SW, op == `SB, op == `SC};    // write to memory
+    assign mem_we = |{op == `SW, op == `SB, op == `SC | op == `SH};    // write to memory
     assign mem_read = |{op == `LB, op == `LBU, op == `LL, op == `LH, op == `LW};  //EDITED BY GRAHAM
     assign mem_byte = |{op == `SB, op == `LB, op == `LBU};    // memory operations use only one byte
     assign mem_signextend = ~|{op == `LBU};     // sign extend sub-word memory reads

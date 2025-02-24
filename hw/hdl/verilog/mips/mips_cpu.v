@@ -20,7 +20,7 @@ module mips_cpu (
 
     wire [31:0] pc_if, pc_id;
     wire [31:0] cur_pc_if, cur_pc_id; //ADDED BY GRAHAM
-    wire mem_halfword_ex;             //ADDED BY GRAHAM
+    wire mem_halfword_ex, mem_halfword_load, mem_halfword_load_ex;             //ADDED BY GRAHAM
     wire [31:0] instr_sav;
     wire [31:0] instr_id;
     wire jump_branch_id, jump_target_id, jump_reg_id; //ADDED BY GRAHAM
@@ -110,6 +110,7 @@ module mips_cpu (
         .mem_read           (mem_read_id),
         .mem_byte           (mem_byte_id),
         .mem_halfword_ex    (mem_halfword_ex), //ADDED BY GRAHAM
+        .mem_halfword_load (mem_halfword_load), //ADDED BY GRAHAM
         .mem_signextend     (mem_signextend_id),
         .reg_we             (reg_we_id),
         .movn               (movn_id),
@@ -149,9 +150,10 @@ module mips_cpu (
     // needed for M stage
     dffarre #(32) mem_write_data_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_write_data_id), .q(mem_write_data_ex));
     dffarre mem_we_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_we_id & ~mem_sc_mask_id), .q(mem_we_ex));
-    dffarre mem_read_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(1'b0), .q());
+    dffarre mem_read_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_read_id), .q(mem_read_ex));
     dffarre mem_byte_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_byte_id), .q(mem_byte_ex));
     dffarre mem_signextend_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_signextend_id), .q(mem_signextend_ex));
+    dffarre mem_halfword_load_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_halfword_load), .q(mem_halfword_load_ex)); //ADDED BY GRAHAM
 
     // needed for W stage
     dffarre #(5) reg_write_addr_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(reg_write_addr_id), .q(reg_write_addr_ex));
@@ -170,19 +172,28 @@ module mips_cpu (
     );
 
     // needed for M stage
+
+    //wire [15:0] mem_read_data_halfword = (alu_result_mem[1:0] == 2'b00) ? mem_read_data[31:16] : mem_read_data[15:0]; //ADDED BY GRAHAM big endian
+    wire [15:0] mem_read_data_halfword = (alu_result_mem[1:0] == 2'b00) ? mem_read_data[15:0] : mem_read_data[31:16]; //ADDED BY GRAHAM little endian
+    wire [31:0] mem_read_data_halfword_extended = mem_halfword_load_ex ? {{16{(mem_signextend_mem & mem_read_data_halfword[15])}}, mem_read_data_halfword} : mem_read_data; //ADDED BY GRAHAM
+
+
+
     wire [31:0] sc_result = {{31{1'b0}},(mem_sc_ex & mem_we_ex)};
     wire [31:0] alu_sc_result_ex = alu_result_ex;   // TODO: Need to conditionally inject SC value
     dffare #(32) alu_result_ex2mem (.clk(clk), .r(rst), .en(en), .d(alu_sc_result_ex), .q(alu_result_mem));
-    dffare mem_read_ex2mem (.clk(clk), .r(rst), .en(en), .d(1'b0), .q());
+    dffare mem_read_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_read_ex), .q(mem_read_mem));
     dffare mem_byte_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_byte_ex), .q(mem_byte_mem));
     dffare mem_signextend_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_signextend_ex), .q(mem_signextend_mem));
+
+
 
     // needed for W stage
     dffare #(5) reg_write_addr_ex2mem (.clk(clk), .r(rst), .en(en), .d(reg_write_addr_ex), .q(reg_write_addr_mem));
     dffare reg_we_ex2mem (.clk(clk), .r(rst), .en(en), .d(reg_we_ex), .q(reg_we_mem));
 
-    assign mem_read_ex = 1'b0;
-    assign mem_read_mem = 1'b0;
+    //assign mem_read_ex = mem_read_id;
+    //assign mem_read_mem = mem_read_id;
     assign mem_read_en = mem_read_ex;
     assign mem_write_en[3] = mem_we_ex & (~mem_byte_ex | (mem_addr[1:0] == 2'b00));
     assign mem_write_en[2] = mem_we_ex & (~mem_byte_ex | (mem_addr[1:0] == 2'b01));
@@ -194,7 +205,8 @@ module mips_cpu (
                                        ((alu_result_mem[1:0] == 2'b01) ? mem_read_data[23:16] :
                                        ((alu_result_mem[1:0] == 2'b10) ? mem_read_data[15:8] : mem_read_data[7:0]));
     assign mem_read_data_byte_extend = {{24{mem_signextend_mem & mem_read_data_byte_select[7]}}, mem_read_data_byte_select};
-    assign mem_out = (mem_byte_mem) ? mem_read_data_byte_extend : mem_read_data;
+    // assign mem_out = (mem_byte_mem) ? mem_read_data_byte_extend : mem_read_data;
+    assign mem_out = (mem_byte_mem) ? mem_read_data_byte_extend : (mem_halfword_load_ex) ? mem_read_data_halfword_extended : mem_read_data; //EDITED BY GRAHAM, original is above
     assign reg_write_data_mem = mem_read_mem ? mem_out : alu_result_mem;
 
     // needed for W stage
