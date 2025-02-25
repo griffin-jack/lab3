@@ -118,9 +118,10 @@ module decode (
     wire isSRA = (op == `SPECIAL) & (funct == `SRA);
     wire isSLLV = (op == `SPECIAL) & (funct == `SLLV);
     wire isSRLV = (op == `SPECIAL) & (funct == `SRLV);
+    wire isSRAV = (op == `SPECIAL) & (funct == `SRAV); //JACK
 
     wire isShiftImm = isSLL | isSRL | isSRA;
-    wire isShift = isShiftImm | isSLLV | isSRLV;
+    wire isShift = isShiftImm | isSLLV | isSRLV | isSRAV; //JACK
 
     //TESTING
     wire isMUL = (op == `SPECIAL) & (funct == `MUL);
@@ -168,10 +169,11 @@ module decode (
             {`SPECIAL, `SRAV}:  alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SPECIAL, `SRA}:   alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM  
+            {`LH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY JACK  
             {`LL, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM
             {`SC, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM   
             {`SPECIAL, `NOR}:   alu_opcode = `ALU_NOR;  //ADDED BY GRAHAM
-            {`SPECIAL, `MUL}:   alu_opcode = `ALU_MUL;  //ADDED BY GRAHAM
+            {`SPECIAL2, `MUL}:   alu_opcode = `ALU_MUL;  //EDITED BY JACK
 
             // compare rs data to 0, only care about 1 operand
             {`BGTZ, `DC6}:      alu_opcode = `ALU_PASSX;
@@ -237,7 +239,7 @@ module decode (
                             
 
     //MUST ALSO ADD || (rt_mem_dependency & read_from_rt);
-    assign stall = (rs_mem_dependency & read_from_rs) || (rt_mem_dependency & read_from_rt) || jump_branch;  //EDITED BY GRAHAM, JACK
+    assign stall = (rs_mem_dependency & read_from_rs) || (rt_mem_dependency & read_from_rt);  //EDITED BY GRAHAM, JACK
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
@@ -317,9 +319,15 @@ module decode (
     //ALSO PART OF DECODE MODULE
 
     wire isEqual = rs_data == rt_data;
+    wire isNeg = rs_data[31]; //JACK
+    wire isZero = ~|rs_data; //JACK
 
-    assign jump_branch = |{isBEQ & isEqual,
-                           isBNE & ~isEqual};
+    assign jump_branch = |{isBEQ & isEqual, //JACK
+                           isBNE & ~isEqual,
+                           isBLEZ & (isNeg | isZero),
+                           isBGTZ & ~(isNeg | isZero),
+                           isBLTZNL & isNeg,
+                           isBGEZNL & ~isNeg};
 
 
     ///// JUMP LOGIC ////
