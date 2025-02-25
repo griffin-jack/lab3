@@ -8,7 +8,7 @@
 
 module decode (
     input [31:0] pc,          // program counter for next instruction
-    input [31:0] cur_pc,      //ADDED BY GRAHAM
+    //input [31:0] cur_pc,      //ADDED BY GRAHAM
     input [31:0] instr,       // current instructions program counter, used to compute return address
     input [31:0] rs_data_in,
     input [31:0] rt_data_in,
@@ -16,7 +16,7 @@ module decode (
     output wire [4:0] reg_write_addr,
     output wire jump_branch,
     output wire [31:0] jump_addr, //ADDED BY GRAHAM
-    output wire jump_target,
+    output wire [31:0] jump_target,
     output wire jump_reg,
     output wire [31:0] jr_pc,
     output reg [3:0] alu_opcode,
@@ -215,15 +215,17 @@ module decode (
     assign rt_data = rt_data_in;
 
     wire rs_mem_dependency = &{rs_addr == reg_write_addr_ex, mem_read_ex, rs_addr != `ZERO};
-
     wire read_from_rs = ~|{isLUI, jump_target, isShiftImm};
+
+    //TO DO MAKE RT DEPENENDENCY
+    //wire rs_mem_dependency = &{rs_addr == reg_write_addr_ex, mem_read_ex, rs_addr != `ZERO};
+    //wire read_from_rs = ~|{isLUI, jump_target, isShiftImm};
 
     wire isALUImm = |{op == `ADDI, op == `ADDIU, op == `SLTI, op == `SLTIU, op == `ANDI, op == `ORI};
     wire read_from_rt = ~|{isLUI, jump_target, isALUImm, mem_read};
+                              //ADDED BY GRAHAM
 
-    wire isJumpReg = isJR || isJALR;                                 //ADDED BY GRAHAM
-
-    assign stall = (rs_mem_dependency & read_from_rs) || isJumpReg;  //EDITED BY GRAHAM
+    assign stall = (rs_mem_dependency & read_from_rs);// || (rt_mem_dependency & read_from_rt); //|| isJumpReg;  //EDITED BY GRAHAM
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
@@ -233,8 +235,6 @@ module decode (
 
     assign mem_halfword_ex = (op == `SH); //ADDED BY GRAHAM
     assign mem_halfword_load = (op == `LH); //ADDED BY GRAHAM
-
-    assign jr_pc = rs_data;
     
     assign mem_write_data = forward_rt_ex ? alu_result_ex :  //EDITED BY GRAHAM
                             forward_rt_mem ? reg_write_data_mem :
@@ -249,7 +249,7 @@ module decode (
 
     wire [31:0] shift_amount = isShiftImm ? shamt : rs_data[4:0];
     
-    assign alu_op_x = (isJAL || isJALR) ? (cur_pc + 32'd8) :    //EDITED BY GRAHAM
+    assign alu_op_x = (isJAL || isJALR) ? (pc + 32'd8) :    //EDITED BY GRAHAM may need work
                       isShift ? shift_amount : 
                       rs_data;
 
@@ -305,14 +305,42 @@ module decode (
     assign jump_branch = |{isBEQ & isEqual,
                            isBNE & ~isEqual};
 
-    wire [31:0] pc_plus_4 = pc + 32'd4;
+
+    ///// JUMP LOGIC ////
+    
+    wire [31:0] pc_plus_4 = pc + 3'h4;
     wire [31:0] j_target  = {pc_plus_4[31:28], instr[25:0], 2'b0};
 
-    assign jump_target = isJ || isJAL; //EDITED BY GRAHAM, added isJAL
+    wire isJumpReg = isJR || isJALR;   
+    wire isJumpImm = isJ || isJAL; //EDITED BY GRAHAM, added isJAL
 
-    assign jump_addr = jump_target ? j_target : 32'b0;
+    assign jump_target = isJumpReg ? rs_data :
+                       isJumpImm ? j_target : 
+                       32'b0;
 
     
-    assign jump_reg = isJumpReg;   //EDITED BY GRAHAM
 
+
+
+
+    //JUMP QUESTIONS
+    // - I compute jump_addr in ID, and pass it back to IF
+    // - stall is computed in ID, stalls IF
+    // - IF must stall to wait for ID to pass it the jump_addr
+    // - How can IF stall if stall is computed after IF in ID?
+
+    // - What is latching, and should I use a FF between ID and IF if I want IF to stall?
+
+    // - I want IF to stall for the j instruction so as to recieve jump_addr, but run fetch the next instruction (delay slot).
+    // - When I pass jump_addr to IF, won't it already be on the next instruction? is this right?
+
+
+    // - So here is what I want:
+    // - j in IF stage sets PC = PC + 4, fetches next instruction
+    // - While j is in ID stage, delay slot is in IF
+    // - By the time ID completes and computes stall, jump_addr, won't delay slot have moved to ID? 
+    // - I want delay slot to stay in IF after j in ID completes
+
+
+    //why is isJ going high so much in wavform?
 endmodule

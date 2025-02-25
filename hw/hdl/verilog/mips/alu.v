@@ -28,7 +28,7 @@ module alu (
 // blez  - 
 // bltz  - 
 // bne   - 
-// j     - DONE, partially verified (no nop after j in tests)
+// j     - DONE
 // jal   - DONE
 // jalr  - DONE
 // jr    - DONE
