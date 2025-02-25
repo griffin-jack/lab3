@@ -19,13 +19,11 @@ module mips_cpu (
 );
 
     wire [31:0] pc_if, pc_id;
-    //wire [31:0] cur_pc_if, cur_pc_id; //ADDED BY GRAHAM
     wire mem_halfword_ex, mem_halfword_load, mem_halfword_load_ex;             //ADDED BY GRAHAM
     wire [31:0] instr_sav;
     wire [31:0] instr_id;
-    wire [31:0] jump_target;
-    wire jump_branch // ADDED BY JACK
-    wire jump_branch_id, jump_branch_if; //ADDED BY GRAHAM
+    wire [31:0] jump_target; //EDITED BY GRAHAM, made 1 bit to 32 bits
+    wire jump_branch        // ADDED BY JACK
     wire [31:0] jump_addr_id, jump_addr_if;
     wire [4:0] rs_addr_id, rt_addr_id;
     wire [31:0] rs_data_id, rt_data_id;

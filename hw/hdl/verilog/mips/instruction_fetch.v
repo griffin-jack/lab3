@@ -21,9 +21,10 @@ module instruction_fetch (
   );
 
   wire isJump = ~(jump_target == 32'b0);
+
   wire [31:0] pc_next = isJump ? jump_target :
-       jump_branch ? branch_addr :
-       (pc + 3'h4);
+              jump_branch ? branch_addr :
+              (pc + 3'h4);
 
 
   dffare #(32) pc_reg (.clk(clk), .r(rst), .en(en), .d(pc_next), .q(pc));
