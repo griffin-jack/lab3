@@ -23,6 +23,7 @@ module mips_cpu (
     wire mem_halfword_ex, mem_halfword_load, mem_halfword_load_ex;             //ADDED BY GRAHAM
     wire [31:0] instr_sav;
     wire [31:0] instr_id;
+    wire jump_branch // ADDED BY JACK
     wire jump_branch_id, jump_target_id, jump_reg_id; //ADDED BY GRAHAM
     wire jump_branch_if, jump_target_if, jump_reg_if; //ADDED BY GRAHAM
     wire [31:0] jump_addr_id, jump_addr_if;
@@ -59,7 +60,9 @@ module mips_cpu (
         .en             (en_if),
         .jump_target    (jump_target_id),
         .jump_reg       (jump_reg_id),     // ADDED BY GRAHAM, Signal for register jumps (jr/jalr)
+        .jump_branch    (jump_branch),  // ADDED BY JACK, Signal for branch taken
         .jump_addr      (jump_addr_if),    // ADDED BY GRAHAM
+        .branch_addr    (branch_addr),     // ADDED BY JACK
         .jr_pc_if       (jr_pc_id),        // ADDED BY GRAHAM, Pass the jump address from the Decode stage
         .pc_id          (pc_id),
         //.instr_id       (instr_id[25:0]),
@@ -71,7 +74,7 @@ module mips_cpu (
 
     // needed for D stage
 
-
+    // FROM JACK: I DON'T THINK WE WANT THESE FLIP-FLOPS SINCE THE IF STAGE NEEDS THE JUMP/BRANCH INFO IMMEDIATELY
     dffare #(32) jump_addr_id2if (.clk(clk), .r(rst), .en(en_if), .d(jump_addr_id), .q(jump_addr_if)); //ADDED BY GRAHAM
 
     dffare #(1) jump_target_id2if (.clk(clk), .r(rst), .en(en_if), .d(jump_target_id), .q(jump_target_if)); //ADDED BY GRAHAM
@@ -98,7 +101,7 @@ module mips_cpu (
 
         .reg_write_addr     (reg_write_addr_id),
         .jump_addr          (jump_addr_id),   //ADDED BY GRAHAM
-        .jump_branch        (jump_branch_id),
+        .jump_branch        (jump_branch),
         .jump_target        (jump_target_id),
         .jump_reg           (jump_reg_id),
         .jr_pc              (jr_pc_id),
