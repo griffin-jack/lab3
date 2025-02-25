@@ -212,7 +212,6 @@ module decode (
 //******************************************************************************
 
     wire forward_rs_mem = &{rs_addr == reg_write_addr_mem, rs_addr != `ZERO, reg_we_mem};
-    wire forward_rt_mem = &{rt_addr == reg_write_addr_mem, rt_addr != `ZERO, reg_we_mem}; // ADDED BY JACK
 
     assign rs_data = forward_rs_ex ? alu_result_ex : 
                 (forward_rs_mem ? reg_write_data_mem : rs_data_in); //JACK
