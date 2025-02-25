@@ -212,9 +212,13 @@ module decode (
 //******************************************************************************
 
     wire forward_rs_mem = &{rs_addr == reg_write_addr_mem, rs_addr != `ZERO, reg_we_mem};
+    wire forward_rt_mem = &{rt_addr == reg_write_addr_mem, rt_addr != `ZERO, reg_we_mem}; // ADDED BY JACK
 
-    assign rs_data = forward_rs_mem ? reg_write_data_mem : rs_data_in;
-    assign rt_data = rt_data_in;
+    assign rs_data = forward_rs_ex ? alu_result_ex : 
+                (forward_rs_mem ? reg_write_data_mem : rs_data_in); //JACK
+
+    assign rt_data = forward_rt_ex ? alu_result_ex : 
+                (forward_rt_mem ? reg_write_data_mem : rt_data_in); //JACK
 
     wire rs_mem_dependency = &{rs_addr == reg_write_addr_ex, mem_read_ex, rs_addr != `ZERO};
     wire read_from_rs = ~|{isLUI, isJump, isShiftImm}; //EDITED BY GRAHAM
@@ -233,6 +237,7 @@ module decode (
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
     // Forward from EX stage if applicable 
     wire forward_rt_ex = (rt_addr == reg_write_addr_ex) && (rt_addr != `ZERO) && reg_we_ex;  //ADDED BY GRAHAM
+    wire forward_rs_ex = &{rs_addr == reg_write_addr_ex, rs_addr != `ZERO, reg_we_ex}; // ADDED BY JACK
 
 
     assign mem_halfword_ex = (op == `SH); //ADDED BY GRAHAM
@@ -259,7 +264,7 @@ module decode (
 
     wire [4:0] ra_addr = 5'd31;  // ADDED BY GRAHAM, $ra (return address register)
 
-    assign alu_op_y = (use_imm) ? imm : rt_data;
+    assign alu_op_y = (op == `JAL || funct == `JALR) ? pc + 8 : (use_imm) ? imm : rt_data; // JACK: use op_y for immediate operations including JAL, JALR
     
     assign reg_write_addr = (isJAL) ? ra_addr : //EDITED BY GRAHAM
                             (isJALR) ? rd_addr :
