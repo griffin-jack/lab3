@@ -40,12 +40,12 @@ boot:
     sltiu   $v1, $t5, 1         # $v1 = 1 if $t5 < 1 (i.e. $t5 == 0)
     and     $v0, $v0, $v1       # $v0 = 1 if both cases are correct
 
-    nop
+
     sw      $v0, 4($s0)         # Store test result (1 means pass)
     sw      $s1, 0($s0)         # Store 'done'
 
 $done:
     j       $done
-    nop
+
 
     .end boot

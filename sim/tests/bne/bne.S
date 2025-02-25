@@ -22,7 +22,6 @@ boot:
     ori     $t0, $0, 1
     ori     $v0, $0, 0          # The test result starts as a failure
     bne     $t0, $0, $target_ne
-    nop
 
 $finish:
     sw      $v0, 4($s0)
@@ -30,7 +29,6 @@ $finish:
 
 $done:
     j       $done
-    nop
 
 $target_ne:
     j       $finish
