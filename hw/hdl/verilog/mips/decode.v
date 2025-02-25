@@ -122,6 +122,12 @@ module decode (
     wire isShiftImm = isSLL | isSRL | isSRA;
     wire isShift = isShiftImm | isSLLV | isSRLV;
 
+    //TESTING
+    wire isMUL = (op == `SPECIAL) & (funct == `MUL);
+    wire isNOR = (op == `SPECIAL) & (funct == `NOR);
+    wire isOR = (op == `SPECIAL) & (funct == `OR);
+
+
 //******************************************************************************
 // ALU instructions decode / control signal for ALU datapath
 //******************************************************************************

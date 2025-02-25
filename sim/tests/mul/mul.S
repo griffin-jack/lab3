@@ -23,8 +23,11 @@ boot:
     ori     $t0, $t0, 0xfffd
     ori     $t1, $0, 0x4        # B = 0x4
     mul     $t2, $t0, $t1       # C = A*B = -12
+    nop
     mul     $t3, $t0, $t0       # D = A*A = 9
+    nop
     mul     $t4, $t1, $t1       # E = B*B = 16
+    nop
     addiu   $s2, $t2, 12
     sltiu   $v0, $s2, 1
     addiu   $s3, $t3, -9
