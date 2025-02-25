@@ -17,6 +17,7 @@ module decode (
     output wire jump_branch,
     output wire [31:0] jump_addr, //ADDED BY GRAHAM
     output wire [31:0] jump_target,
+    output wire [31:0] branch_addr, //ADDED BY JACK
     output wire jump_reg,
     output wire [31:0] jr_pc,
     output reg [3:0] alu_opcode,
@@ -225,7 +226,10 @@ module decode (
     wire read_from_rt = ~|{isLUI, jump_target, isALUImm, mem_read};
                               //ADDED BY GRAHAM
 
-    assign stall = (rs_mem_dependency & read_from_rs);// || (rt_mem_dependency & read_from_rt); //|| isJumpReg;  //EDITED BY GRAHAM
+                            //ADDED BY GRAHAM
+
+    //MUST ALSO ADD || (rt_mem_dependency & read_from_rt);
+    assign stall = (rs_mem_dependency & read_from_rs) || jump_branch;  //EDITED BY GRAHAM, JACK
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
@@ -317,6 +321,8 @@ module decode (
     assign jump_target = isJumpReg ? rs_data :
                        isJumpImm ? j_target : 
                        32'b0;
+
+    assign branch_addr = pc_plus_4 + {imm_sign_extend[29:0], 2'b0}; // ADDED BY JACK
 
     
 
