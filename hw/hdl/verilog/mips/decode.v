@@ -168,6 +168,8 @@ module decode (
             {`SPECIAL, `SRAV}:  alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SPECIAL, `SRA}:   alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM  
+            {`LL, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM
+            {`SC, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM   
             {`SPECIAL, `NOR}:   alu_opcode = `ALU_NOR;  //ADDED BY GRAHAM
             {`SPECIAL, `MUL}:   alu_opcode = `ALU_MUL;  //ADDED BY GRAHAM
 
@@ -286,7 +288,7 @@ module decode (
 //******************************************************************************
 // Memory control
 //******************************************************************************
-    assign mem_we = |{op == `SW, op == `SB, op == `SC | op == `SH};    // write to memory
+    assign mem_we = |{op == `SW, op == `SB, op == `SC, op == `SH};    // write to memory
     assign mem_read = |{op == `LB, op == `LBU, op == `LL, op == `LH, op == `LW};  //EDITED BY GRAHAM
     assign mem_byte = |{op == `SB, op == `LB, op == `LBU};    // memory operations use only one byte
     assign mem_signextend = ~|{op == `LBU};     // sign extend sub-word memory reads
@@ -295,12 +297,17 @@ module decode (
 // Load linked / Store conditional
 //******************************************************************************
     assign mem_sc_id = (op == `SC);
-
+    
     // 'atomic_id' is high when a load-linked has not been followed by a store.
-    assign atomic_id = 1'b0;
+    assign atomic_id = (op == `LL) ? 1'b1 :
+                   (op == `SC) ? 1'b0 : atomic_ex;
 
     // 'mem_sc_mask_id' is high when a store conditional should not store
     assign mem_sc_mask_id = 1'b0;
+    assign mem_sc_mask_id = (op == `SC) ? ~atomic_ex : 1'b0;
+
+   
+
 
 //******************************************************************************
 // Branch resolution

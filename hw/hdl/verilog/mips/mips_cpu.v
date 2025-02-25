@@ -4,6 +4,7 @@
 // MIPS CPU Module. Contains the five stages in the single-cycle MIPS CPU.
 //=============================================================================
 
+`include "mips_defines.v"
 module mips_cpu (
     input clk,
     input rst,
@@ -103,8 +104,8 @@ module mips_cpu (
         .movz               (movz_id),
         .rs_addr            (rs_addr_id),
         .rt_addr            (rt_addr_id),
-        .atomic_id          (mem_atomic_id),
-        .atomic_ex          (mem_atomic_ex),
+        .atomic_id          (mem_atomic_id), //output of decode
+        .atomic_ex          (mem_atomic_ex), //input to decode
         .mem_sc_mask_id     (mem_sc_mask_id),
         .mem_sc_id          (mem_sc_id),
         .stall              (stall),
@@ -121,10 +122,6 @@ module mips_cpu (
         .reg_write_data_mem (reg_write_data_mem)
     );
 
-    // Load-linked / Store-conditional
-    wire atomic_en = en & mem_read_id;
-    dffarre       atomic  (.clk(clk), .ar(rst), .r(rst_id), .en(atomic_en), .d(mem_atomic_id), .q(mem_atomic_ex));
-    dffarre       sc      (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_sc_id), .q(mem_sc_ex));
 
     // needed for X stage
     dffarre #(32) alu_op_x_id2ex (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(alu_op_x_id), .q(alu_op_x_ex));
@@ -165,8 +162,21 @@ module mips_cpu (
 
 
 
+
+    // Load-linked / Store-conditional Section
+    
+    wire atomic_en = en & mem_read_id;
+    dffarre       atomic  (.clk(clk), .ar(rst), .r(rst_id), .en(atomic_en), .d(mem_atomic_id), .q(mem_atomic_ex));
+    dffarre       sc      (.clk(clk), .ar(rst), .r(rst_id), .en(en), .d(mem_sc_id), .q(mem_sc_ex));
+
+    wire [5:0] op_id = instr_id[31:26];
+    wire isSC = (op_id == `SC); 
+
     wire [31:0] sc_result = {{31{1'b0}},(mem_sc_ex & mem_we_ex)};
-    wire [31:0] alu_sc_result_ex = alu_result_ex;   // TODO: Need to conditionally inject SC value
+    wire [31:0] alu_sc_result_ex = (isSC) ? sc_result : alu_result_ex;  // EDITED BY GRAHAM
+
+   
+
     dffare #(32) alu_result_ex2mem (.clk(clk), .r(rst), .en(en), .d(alu_sc_result_ex), .q(alu_result_mem));
     dffare mem_read_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_read_ex), .q(mem_read_mem));
     dffare mem_byte_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_byte_ex), .q(mem_byte_mem));
