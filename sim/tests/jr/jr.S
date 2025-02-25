@@ -29,7 +29,6 @@ $finish:
 
 $done:
     j       $done
-    nop
 
 $target:
     j       $finish

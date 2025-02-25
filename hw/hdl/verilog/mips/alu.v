@@ -22,30 +22,30 @@ module alu (
 // addu  - DONE, VERIFIED with more robust test
 // and   - DONE, VERIFIED with more robust test
 // andi  - DONE, VERIFIED with more robust test
-// beq   - 
-// bgez  - 
-// bgtz  - 
-// blez  - 
-// bltz  - 
-// bne   - 
-// j     - DONE
-// jal   - DONE
-// jalr  - DONE
-// jr    - DONE
+// beq   - DONE, VERIFIED 
+// bgez  - DONE, VERIFIED 
+// bgtz  - DONE, VERIFIED 
+// blez  - DONE, VERIFIED 
+// bltz  - DONE, VERIFIED 
+// bne   - DONE, VERIFIED 
+// j     - DONE, VERIFIED
+// jal   - DONE, VERIFIED
+// jalr  - DONE, VERIFIED
+// jr    - DONE, VERIFIED
 // lb    - DONE, VERIFIED
 // lbu   - DONE, VERIFIED
-// lh    - 
-// ll    - 
+// lh    - DONE,
+// ll    - DONE, VERIFIED 
 // lui   - DONE, VERIFIED
 // lw    - DONE, VERIFIED
 // movn  - DONE, VERIFIED
 // movz  - DONE, VERIFIED
-// mul   - DONE, failing tests
-// nor   - DONE, failing tests
+// mul   - DONE, VERIFIED
+// nor   - DONE
 // or    - DONE, VERIFIED
 // ori   - DONE, VERIFIED 
 // sb    - DONE, VERIFIED
-// sc    - 
+// sc    - DONE, VERIFIED
 // sh    - DONE, VERIFIED
 // sll   - DONE, VERIFIED
 // sllv  - DONE, VERIFIED
@@ -90,7 +90,7 @@ module alu (
             `ALU_SLL:   alu_result = alu_op_y << alu_op_x;
             `ALU_XOR:   alu_result = alu_op_x ^ alu_op_y;             //ADDED BY GRAHAM
             `ALU_SRA:   alu_result = alu_op_y_signed >>> alu_op_x;      //ADDED BY GRAHAM
-            `ALU_NOR:   alu_result = ~(alu_op_x | alu_op_y);      //ADDED BY GRAHAM
+            `ALU_NOR:   alu_result = alu_op_x ~| alu_op_y;      //ADDED BY GRAHAM
             `ALU_MUL:   alu_result = alu_op_x_signed * alu_op_y_signed;      //ADDED BY GRAHAM
 
             `ALU_PASSX: alu_result = alu_op_x;
