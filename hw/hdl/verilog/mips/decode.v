@@ -251,9 +251,7 @@ module decode (
 
     wire [31:0] shift_amount = isShiftImm ? shamt : rs_data[4:0];
     
-    assign alu_op_x = (isJAL || isJALR) ? (pc + 32'd8) :    //EDITED BY GRAHAM may need work
-                      isShift ? shift_amount : 
-                      rs_data;
+    assign alu_op_x = isShift ? shift_amount : rs_data; // JACK: deal with links somewhere else
 
     // for link operations, use next pc (current pc + 8)
     // for immediate operations, use Imm
