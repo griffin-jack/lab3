@@ -236,7 +236,7 @@ module decode (
                             
 
     //MUST ALSO ADD || (rt_mem_dependency & read_from_rt);
-    assign stall = (rs_mem_dependency & read_from_rs) || (rt_mem_dependency & read_from_rt) || jump_branch;  //EDITED BY GRAHAM, JACK
+    assign stall = (rs_mem_dependency & read_from_rs) || (rt_mem_dependency & read_from_rt);  //EDITED BY GRAHAM, JACK
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
