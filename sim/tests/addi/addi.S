@@ -21,7 +21,7 @@ boot:
     ori     $s1, $0, 1          # Prepare the 'done' status
     lui     $t0, 0xffff         # A = 0xfffffffd (-3)
     ori     $t0, $t0, 0xfffd
-    addi    $t2, $t0, 4       # C = A+B = 1
+    addi    $t2, $t0, 4         # C = A+B = 1
     sw      $t2, 4($s0)         # Set the test result
     sw      $s1, 0($s0)         # Set 'done'
 

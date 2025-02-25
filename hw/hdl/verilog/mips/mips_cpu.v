@@ -23,12 +23,11 @@ module mips_cpu (
     wire [31:0] instr_sav;
     wire [31:0] instr_id;
     wire [31:0] jump_target; //EDITED BY GRAHAM, made 1 bit to 32 bits
-    wire jump_branch        // ADDED BY JACK
-    wire [31:0] jump_addr_id, jump_addr_if;
+    wire jump_branch;        // ADDED BY JACK
+    wire [31:0] branch_addr; //added by graham?
     wire [4:0] rs_addr_id, rt_addr_id;
     wire [31:0] rs_data_id, rt_data_id;
     wire [31:0] mem_write_data_id, mem_write_data_ex;
-    wire [31:0] jr_pc_id;
     wire [4:0] reg_write_addr_id, reg_write_addr_ex, reg_write_addr_mem, reg_write_addr_wb;
     wire [31:0] mem_out;
     wire [31:0] reg_write_data_mem, reg_write_data_wb;
@@ -66,11 +65,6 @@ module mips_cpu (
     assign pc = pc_if; // output pc to parent module
 
     // needed for D stage
-
-
-    //dffare #(1) jump_target_id2if (.clk(clk), .r(rst), .en(en_if), .d(jump_target_id), .q(jump_target_if)); //ADDED BY GRAHAM
-    //dffare #(1) jump_reg_id2if (.clk(clk), .r(rst), .en(en_if), .d(jump_reg_id), .q(jump_reg_if)); //ADDED BY GRAHAM
-
     dffare #(32) pc_if2id (.clk(clk), .r(rst), .en(en_if), .d(pc_if), .q(pc_id));
 
 
@@ -90,12 +84,11 @@ module mips_cpu (
         .rt_data_in         (rt_data_id),
 
         .reg_write_addr     (reg_write_addr_id),
-        .jump_addr          (jump_addr_id),   //ADDED BY GRAHAM
         .jump_branch        (jump_branch),
+        .branch_addr        (branch_addr), //added by graham?
         .jump_target        (jump_target),
 
         .jump_reg           (jump_reg_id),
-        .jr_pc              (jr_pc_id),
         .alu_opcode         (alu_opcode_id),
         .alu_op_x           (alu_op_x_id),
         .alu_op_y           (alu_op_y_id),

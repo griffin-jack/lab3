@@ -14,11 +14,9 @@ module decode (
 
     output wire [4:0] reg_write_addr,
     output wire jump_branch,
-    output wire [31:0] jump_addr, //ADDED BY GRAHAM
     output wire [31:0] jump_target,
     output wire [31:0] branch_addr, //ADDED BY JACK
     output wire jump_reg,
-    output wire [31:0] jr_pc,
     output reg [3:0] alu_opcode,
     output wire [31:0] alu_op_x,
     output wire [31:0] alu_op_y,
@@ -107,6 +105,10 @@ module decode (
     wire isJAL  = (op == `JAL);                         //ADDED BY GRAHAM
     wire isJR   = (op == `SPECIAL) & (funct == `JR);    //ADDED BY GRAHAM
     wire isJALR = (op == `SPECIAL) & (funct == `JALR);  //ADDED BY GRAHAM
+
+    wire isJumpReg = isJR || isJALR;   
+    wire isJumpImm = isJ || isJAL; //EDITED BY GRAHAM, added isJAL
+    wire isJump = isJumpReg || isJumpImm;
 
 //******************************************************************************
 // shift instruction decode
@@ -215,20 +217,17 @@ module decode (
     assign rt_data = rt_data_in;
 
     wire rs_mem_dependency = &{rs_addr == reg_write_addr_ex, mem_read_ex, rs_addr != `ZERO};
-    wire read_from_rs = ~|{isLUI, jump_target, isShiftImm};
+    wire read_from_rs = ~|{isLUI, isJump, isShiftImm}; //EDITED BY GRAHAM
 
     //TO DO MAKE RT DEPENENDENCY
-    //wire rs_mem_dependency = &{rs_addr == reg_write_addr_ex, mem_read_ex, rs_addr != `ZERO};
-    //wire read_from_rs = ~|{isLUI, jump_target, isShiftImm};
+    wire rt_mem_dependency = &{rt_addr == reg_write_addr_ex, mem_read_ex, rt_addr != `ZERO}; //ADDED BY GRAHAM
 
     wire isALUImm = |{op == `ADDI, op == `ADDIU, op == `SLTI, op == `SLTIU, op == `ANDI, op == `ORI};
-    wire read_from_rt = ~|{isLUI, jump_target, isALUImm, mem_read};
-                              //ADDED BY GRAHAM
-
-                            //ADDED BY GRAHAM
+    wire read_from_rt = ~|{isLUI, isJump, isALUImm, mem_read}; //EDITED BY GRAHAM, changed jump_target to isJump
+                            
 
     //MUST ALSO ADD || (rt_mem_dependency & read_from_rt);
-    assign stall = (rs_mem_dependency & read_from_rs) || jump_branch;  //EDITED BY GRAHAM, JACK
+    assign stall = (rs_mem_dependency & read_from_rs) || (rt_mem_dependency & read_from_rt) || jump_branch;  //EDITED BY GRAHAM, JACK
 
     // Forward from MEM stage if applicable, reg_write_addr_mem is from the previous instruction in the mem stage
     wire forward_rt_mem = (rt_addr == reg_write_addr_mem) && (rt_addr != `ZERO) && reg_we_mem;  //ADDED BY GRAHAM
@@ -314,8 +313,7 @@ module decode (
     wire [31:0] pc_plus_4 = pc + 3'h4;
     wire [31:0] j_target  = {pc_plus_4[31:28], instr[25:0], 2'b0};
 
-    wire isJumpReg = isJR || isJALR;   
-    wire isJumpImm = isJ || isJAL; //EDITED BY GRAHAM, added isJAL
+    
 
     assign jump_target = isJumpReg ? rs_data :
                        isJumpImm ? j_target : 
