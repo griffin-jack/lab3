@@ -169,8 +169,9 @@ module decode (
             {`SPECIAL, `SRAV}:  alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SPECIAL, `SRA}:   alu_opcode = `ALU_SRA;  //ADDED BY GRAHAM
             {`SH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY GRAHAM  
+            {`LH, `DC6}:        alu_opcode = `ALU_ADD;  //ADDED BY JACK  
             {`SPECIAL, `NOR}:   alu_opcode = `ALU_NOR;  //ADDED BY GRAHAM
-            {`SPECIAL, `MUL}:   alu_opcode = `ALU_MUL;  //ADDED BY GRAHAM
+            {`SPECIAL2, `MUL}:   alu_opcode = `ALU_MUL;  //EDITED BY JACK
 
             // compare rs data to 0, only care about 1 operand
             {`BGTZ, `DC6}:      alu_opcode = `ALU_PASSX;
