@@ -319,7 +319,7 @@ module decode (
                            isBLEZ & (isNeg | isZero),
                            isBGTZ & ~(isNeg | isZero),
                            isBLTZ & isNeg,
-                           isBGEZ & ~isNeg,};
+                           isBGEZ & ~isNeg};
 
 
     ///// JUMP LOGIC ////
