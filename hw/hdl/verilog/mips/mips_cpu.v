@@ -88,7 +88,6 @@ module mips_cpu (
         .branch_addr        (branch_addr), //added by graham?
         .jump_target        (jump_target),
 
-        .jump_reg           (jump_reg_id),
         .alu_opcode         (alu_opcode_id),
         .alu_op_x           (alu_op_x_id),
         .alu_op_y           (alu_op_y_id),

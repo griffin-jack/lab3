@@ -16,7 +16,6 @@ module decode (
     output wire jump_branch,
     output wire [31:0] jump_target,
     output wire [31:0] branch_addr, //ADDED BY JACK
-    output wire jump_reg,
     output reg [3:0] alu_opcode,
     output wire [31:0] alu_op_x,
     output wire [31:0] alu_op_y,
