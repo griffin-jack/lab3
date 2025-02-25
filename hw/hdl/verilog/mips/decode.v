@@ -118,9 +118,10 @@ module decode (
     wire isSRA = (op == `SPECIAL) & (funct == `SRA);
     wire isSLLV = (op == `SPECIAL) & (funct == `SLLV);
     wire isSRLV = (op == `SPECIAL) & (funct == `SRLV);
+    wire isSRAV = (op == `SPECIAL) & (funct == `SRAV); //JACK
 
     wire isShiftImm = isSLL | isSRL | isSRA;
-    wire isShift = isShiftImm | isSLLV | isSRLV;
+    wire isShift = isShiftImm | isSLLV | isSRLV | isSRAV; //JACK
 
     //TESTING
     wire isMUL = (op == `SPECIAL) & (funct == `MUL);
@@ -310,9 +311,15 @@ module decode (
     //ALSO PART OF DECODE MODULE
 
     wire isEqual = rs_data == rt_data;
+    wire isNeg = rs_data[31]; //JACK
+    wire isZero = ~|rs_data; //JACK
 
-    assign jump_branch = |{isBEQ & isEqual,
-                           isBNE & ~isEqual};
+    assign jump_branch = |{isBEQ & isEqual, //JACK
+                           isBNE & ~isEqual,
+                           isBLEZ & (isNeg | isZero),
+                           isBGTZ & ~(isNeg | isZero),
+                           isBLTZ & isNeg,
+                           isBGEZ & ~isNeg,};
 
 
     ///// JUMP LOGIC ////
