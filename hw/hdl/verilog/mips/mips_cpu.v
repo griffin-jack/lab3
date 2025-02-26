@@ -156,8 +156,8 @@ module mips_cpu (
 
     // needed for M stage
 
-    wire [15:0] mem_read_data_halfword = (alu_result_mem[1:0] == 2'b00) ? mem_read_data[31:16] : mem_read_data[15:0]; //CHANGED BY JACK big endian
-    //wire [15:0] mem_read_data_halfword = (alu_result_mem[1:0] == 2'b00) ? mem_read_data[15:0] : mem_read_data[31:16]; //ADDED BY GRAHAM little endian
+    //wire [15:0] mem_read_data_halfword = (alu_result_mem[1:0] == 2'b00) ? mem_read_data[31:16] : mem_read_data[15:0]; //ADDED BY GRAHAM big endian
+    wire [15:0] mem_read_data_halfword = (alu_result_mem[1:0] == 2'b00) ? mem_read_data[15:0] : mem_read_data[31:16]; //ADDED BY GRAHAM little endian
     wire [31:0] mem_read_data_halfword_extended = {{16{(mem_signextend_mem & mem_read_data_halfword[15])}}, mem_read_data_halfword}; //EDITED BY JACK
 
 
