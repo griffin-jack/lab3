@@ -20,7 +20,7 @@ module mips_cpu (
 );
 
     wire [31:0] pc_if, pc_id;
-    wire mem_halfword_ex, mem_halfword_load, mem_halfword_load_ex;             //ADDED BY GRAHAM
+    wire mem_halfword_ex, mem_halfword_load, mem_halfword_load_ex, mem_halfword_load_mem;             //ADDED BY GRAHAM, JACK
     wire [31:0] instr_sav;
     wire [31:0] instr_id;
     wire [31:0] jump_target; //EDITED BY GRAHAM, made 1 bit to 32 bits
@@ -181,6 +181,7 @@ module mips_cpu (
     dffare mem_read_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_read_ex), .q(mem_read_mem));
     dffare mem_byte_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_byte_ex), .q(mem_byte_mem));
     dffare mem_signextend_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_signextend_ex), .q(mem_signextend_mem));
+    dffare mem_halfword_load_ex2mem (.clk(clk), .r(rst), .en(en), .d(mem_halfword_load_ex), .q(mem_halfword_load_mem)); // JACK ADDED
 
 
 
@@ -202,7 +203,7 @@ module mips_cpu (
                                        ((alu_result_mem[1:0] == 2'b10) ? mem_read_data[15:8] : mem_read_data[7:0]));
     assign mem_read_data_byte_extend = {{24{mem_signextend_mem & mem_read_data_byte_select[7]}}, mem_read_data_byte_select};
     // assign mem_out = (mem_byte_mem) ? mem_read_data_byte_extend : mem_read_data;
-    assign mem_out = (mem_byte_mem) ? mem_read_data_byte_extend : (mem_halfword_load_ex) ? mem_read_data_halfword_extended : mem_read_data; //EDITED BY GRAHAM, original is above
+    assign mem_out = (mem_byte_mem) ? mem_read_data_byte_extend : (mem_halfword_load_mem) ? mem_read_data_halfword_extended : mem_read_data; //EDITED BY GRAHAM, JACK, original is above
     assign reg_write_data_mem = mem_read_mem ? mem_out : alu_result_mem;
 
     // needed for W stage
