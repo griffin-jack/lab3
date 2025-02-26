@@ -90,7 +90,7 @@ module alu (
             `ALU_SLL:   alu_result = alu_op_y << alu_op_x;
             `ALU_XOR:   alu_result = alu_op_x ^ alu_op_y;             //ADDED BY GRAHAM
             `ALU_SRA:   alu_result = alu_op_y_signed >>> alu_op_x;      //ADDED BY GRAHAM
-            `ALU_NOR:   alu_result = alu_op_x ~| alu_op_y;      //ADDED BY GRAHAM
+            `ALU_NOR:   alu_result = ~(alu_op_x | alu_op_y);          //ADDED BY GRAHAM
             `ALU_MUL:   alu_result = alu_op_x_signed * alu_op_y_signed;      //ADDED BY GRAHAM
 
             `ALU_PASSX: alu_result = alu_op_x;
