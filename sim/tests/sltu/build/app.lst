@@ -7,10 +7,11 @@ Disassembly of section .text:
 00000000 <boot>:
        0:	3c108002 	lui	s0,0x8002
        4:	34110001 	li	s1,0x1
-       8:	00000000 	nop
-       c:	2e08ffff 	sltiu	t0,s0,-1
-	...
-      18:	ae080004 	sw	t0,4(s0)
+       8:	34090000 	li	t1,0x0
+       c:	0229502b 	sltu	t2,s1,t1
+      10:	0131582b 	sltu	t3,t1,s1
+      14:	014b6026 	xor	t4,t2,t3
+      18:	ae0c0004 	sw	t4,4(s0)
       1c:	ae110000 	sw	s1,0(s0)
       20:	08000008 	j	20 <boot+0x20>
       24:	00000000 	nop

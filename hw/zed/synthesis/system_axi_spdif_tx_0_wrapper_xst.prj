@@ -1,0 +1,8 @@
+vhdl axi_spdif_tx_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd
+vhdl axi_spdif_tx_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_package.vhd
+vhdl axi_spdif_tx_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_encoder.vhd
+vhdl adi_common_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/axi_ctrlif.vhd
+vhdl adi_common_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/axi_streaming_dma_tx_fifo.vhd
+vhdl adi_common_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/pl330_dma_fifo.vhd
+vhdl adi_common_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/dma_fifo.vhd
+vhdl work ../hdl/system_axi_spdif_tx_0_wrapper.vhd

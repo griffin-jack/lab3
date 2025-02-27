@@ -7,9 +7,9 @@ Disassembly of section .text:
 00000000 <boot>:
        0:	3c108002 	lui	s0,0x8002
        4:	34110001 	li	s1,0x1
-	...
-      10:	ae110004 	sw	s1,4(s0)
-      14:	ae110000 	sw	s1,0(s0)
-      18:	08000006 	j	18 <boot+0x18>
-      1c:	00000000 	nop
+       8:	00114825 	or	t1,zero,s1
+       c:	ae090004 	sw	t1,4(s0)
+      10:	ae110000 	sw	s1,0(s0)
+      14:	08000005 	j	14 <boot+0x14>
+      18:	00000000 	nop
 	...

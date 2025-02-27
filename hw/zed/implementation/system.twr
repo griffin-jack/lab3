@@ -1,0 +1,150 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+/cad/xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/trce -e 3 -xml system.twx
+system.ncd system.pcf
+
+Design file:              system.ncd
+Physical constraint file: system.pcf
+Device,package,speed:     xc7z020,clg484,C,-1 (PRODUCTION 1.08 2013-10-13)
+Report level:             error report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more 
+   information, see the TSI report.  Please consult the Xilinx Command Line 
+   Tools User Guide for information on generating a TSI report.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: PATH "TS_se_dst_interconnect_reset_resync_path" TIG;
+
+ 2 paths analyzed, 2 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: PATH "TS_se_src_interconnect_reset_resync_path" TIG;
+
+ 2 paths analyzed, 2 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: PATH "TS_se_control_interconnect_reset_resync_path" TIG;
+
+ 2 paths analyzed, 2 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: PATH "TS_gp_interconnect_reset_resync_path" TIG;
+
+ 2 paths analyzed, 2 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk_fpga_0 = PERIOD TIMEGRP "clk_fpga_0" 100 MHz HIGH 
+50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 37671 paths analyzed, 6172 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   9.137ns.
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk_fpga_2 = PERIOD TIMEGRP "clk_fpga_2" 200 MHz HIGH 
+50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 component switching limit errors)
+ Minimum period is   2.800ns.
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk_fpga_3 = PERIOD TIMEGRP "clk_fpga_3" 50 MHz HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 2499584287 paths analyzed, 30202 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is  19.547ns.
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clk_fpga_1 = PERIOD TIMEGRP "clk_fpga_1" 142.857 MHz HIGH 
+50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 0 paths analyzed, 0 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 component switching limit errors)
+--------------------------------------------------------------------------------
+
+================================================================================
+Timing constraint: TS_clock_generator_0_clock_generator_0_SIG_MMCM1_CLKOUT0 = 
+PERIOD TIMEGRP         "clock_generator_0_clock_generator_0_SIG_MMCM1_CLKOUT0" 
+TS_clk_fpga_2         * 0.061440678 HIGH 50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 57 paths analyzed, 45 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   4.343ns.
+--------------------------------------------------------------------------------
+
+
+Derived Constraint Report
+Derived Constraints for TS_clk_fpga_2
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|                               |   Period    |       Actual Period       |      Timing Errors        |      Paths Analyzed       |
+|           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
+|                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+|TS_clk_fpga_2                  |      5.000ns|      2.800ns|      0.267ns|            0|            0|            0|           57|
+| TS_clock_generator_0_clock_gen|     81.379ns|      4.343ns|          N/A|            0|            0|           57|            0|
+| erator_0_SIG_MMCM1_CLKOUT0    |             |             |             |             |             |             |             |
++-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+No constraints were found to generate data for the Data Sheet Report section.
+Use the Advanced Analysis (-a) option or generate global constraints for each
+clock, its pad to setup and clock to pad paths, and a pad to pad constraint.
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 2499622023 paths, 0 nets, and 47517 connections
+
+Design statistics:
+   Minimum period:  19.547ns   (Maximum frequency:  51.159MHz)
+
+
+Analysis completed Wed Feb 26 23:30:27 2025 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 957 MB
+
+
+

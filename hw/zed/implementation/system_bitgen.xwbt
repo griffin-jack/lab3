@@ -1,0 +1,7 @@
+INFILE=/home/users/code/lab3/hw/zed/implementation/system.ncd
+OUTFILE=/home/users/code/lab3/hw/zed/implementation/system.bit
+FAMILY=Zynq
+PART=xc7z020-1clg484
+WORKINGDIR=/home/users/code/lab3/hw/zed/implementation
+LICENSE=ISE
+USER_INFO=211854242_1777585578_210790717_967

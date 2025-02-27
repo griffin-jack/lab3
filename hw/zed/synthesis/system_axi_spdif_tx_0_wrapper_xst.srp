@@ -1,0 +1,890 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/users/code/lab3/hw/zed/synthesis/xst_temp_dir/
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.02 secs
+ 
+--> 
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input Format                       : MIXED
+Input File Name                    : "system_axi_spdif_tx_0_wrapper_xst.prj"
+Verilog Include Directory          : {"/home/users/code/lab3/hw/zed/pcores/" "/home/users/code/lab3/hw/zed_lib/edk/pcores/" "/cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxBFMinterface/pcores/" "/cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/" }
+
+---- Target Parameters
+Target Device                      : xc7z020clg484-1
+Output File Name                   : "../implementation/system_axi_spdif_tx_0_wrapper.ngc"
+
+---- Source Options
+Top Module Name                    : system_axi_spdif_tx_0_wrapper
+
+---- Target Options
+Add IO Buffers                     : NO
+
+---- General Options
+Optimization Goal                  : speed
+Netlist Hierarchy                  : as_optimized
+Optimization Effort                : 1
+Hierarchy Separator                : /
+
+---- Other Options
+Cores Search Directories           : {../implementation}
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_package.vhd" into library axi_spdif_tx_v1_00_a
+Parsing package <tx_package>.
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/axi_ctrlif.vhd" into library adi_common_v1_00_a
+Parsing entity <axi_ctrlif>.
+Parsing architecture <Behavioral> of entity <axi_ctrlif>.
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/dma_fifo.vhd" into library adi_common_v1_00_a
+Parsing entity <dma_fifo>.
+Parsing architecture <imp> of entity <dma_fifo>.
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/axi_streaming_dma_tx_fifo.vhd" into library adi_common_v1_00_a
+Parsing entity <axi_streaming_dma_tx_fifo>.
+Parsing architecture <imp> of entity <axi_streaming_dma_tx_fifo>.
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/pl330_dma_fifo.vhd" into library adi_common_v1_00_a
+Parsing entity <pl330_dma_fifo>.
+Parsing architecture <imp> of entity <pl330_dma_fifo>.
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" into library axi_spdif_tx_v1_00_a
+Parsing entity <axi_spdif_tx>.
+Parsing architecture <IMP> of entity <axi_spdif_tx>.
+WARNING:HDLCompiler:946 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 153: Actual for formal port enable is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 160: Actual for formal port out_ack is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 178: Actual for formal port enable is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 183: Actual for formal port out_ack is neither a static name nor a globally static expression
+Parsing VHDL file "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_encoder.vhd" into library axi_spdif_tx_v1_00_a
+Parsing entity <tx_encoder>.
+Parsing architecture <rtl> of entity <tx_encoder>.
+Parsing VHDL file "/home/users/code/lab3/hw/zed/hdl/system_axi_spdif_tx_0_wrapper.vhd" into library work
+Parsing entity <system_axi_spdif_tx_0_wrapper>.
+Parsing architecture <STRUCTURE> of entity <system_axi_spdif_tx_0_wrapper>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <system_axi_spdif_tx_0_wrapper> (architecture <STRUCTURE>) from library <work>.
+WARNING:HDLCompiler:244 - "/home/users/code/lab3/hw/zed/hdl/system_axi_spdif_tx_0_wrapper.vhd" Line 60: Binding entity axi_spdif_tx does not have generic c_s_axi_min_size
+INFO:HDLCompiler:1408 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 52. axi_spdif_tx is declared here
+
+Elaborating entity <axi_spdif_tx> (architecture <IMP>) with generics from library <axi_spdif_tx_v1_00_a>.
+
+Elaborating entity <pl330_dma_fifo> (architecture <imp>) with generics from library <adi_common_v1_00_a>.
+
+Elaborating entity <dma_fifo> (architecture <imp>) with generics from library <adi_common_v1_00_a>.
+WARNING:HDLCompiler:1127 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 210: Assignment to conf_tinten ignored, since the identifier is never used
+
+Elaborating entity <tx_encoder> (architecture <rtl>) with generics from library <axi_spdif_tx_v1_00_a>.
+INFO:HDLCompiler:679 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_encoder.vhd" Line 214. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_encoder.vhd" Line 395. Case statement is complete. others clause is never selected
+
+Elaborating entity <axi_ctrlif> (architecture <Behavioral>) with generics from library <adi_common_v1_00_a>.
+WARNING:HDLCompiler:92 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 304: config_reg should be on the sensitivity list of the process
+WARNING:HDLCompiler:92 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 305: chstatus_reg should be on the sensitivity list of the process
+INFO:HDLCompiler:1408 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" Line 52. axi_spdif_tx is declared here
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <system_axi_spdif_tx_0_wrapper>.
+    Related source file is "/home/users/code/lab3/hw/zed/hdl/system_axi_spdif_tx_0_wrapper.vhd".
+    Summary:
+	no macro.
+Unit <system_axi_spdif_tx_0_wrapper> synthesized.
+
+Synthesizing Unit <axi_spdif_tx>.
+    Related source file is "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd".
+        C_S_AXI_DATA_WIDTH = 32
+        C_S_AXI_ADDR_WIDTH = 32
+        C_BASEADDR = "01110101110000000000000000000000"
+        C_HIGHADDR = "01110101110000001111111111111111"
+        C_FAMILY = "zynq"
+        C_DMA_TYPE = 1
+WARNING:Xst:647 - Input <S_AXIS_TDATA> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXIS_ACLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXIS_ARESETN> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXIS_TLAST> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXIS_TVALID> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" line 168: Output port <DBG> of the instance <pl330_dma_gen.fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" line 168: Output port <in_ack> of the instance <pl330_dma_gen.fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" line 168: Output port <out_stb> of the instance <pl330_dma_gen.fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/axi_spdif_tx.vhd" line 245: Output port <rd_ack> of the instance <ctrlif> is unconnected or connected to loadless signal.
+    Found 32-bit register for signal <chstatus_reg>.
+    Found 32-bit register for signal <config_reg>.
+    Found 32-bit 3-to-1 multiplexer for signal <rd_data> created at line 303.
+    Summary:
+	inferred  64 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+Unit <axi_spdif_tx> synthesized.
+
+Synthesizing Unit <pl330_dma_fifo>.
+    Related source file is "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/pl330_dma_fifo.vhd".
+        RAM_ADDR_WIDTH = 3
+        FIFO_DWIDTH = 32
+        FIFO_DIRECTION = 0
+WARNING:Xst:653 - Signal <DBG<7:6>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 2-bit register for signal <state>.
+    Found finite state machine <FSM_0> for signal <state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 22                                             |
+    | Inputs             | 7                                              |
+    | Outputs            | 5                                              |
+    | Clock              | dclk (rising_edge)                             |
+    | Reset              | dresetn_INV_18_o (positive)                    |
+    | Reset type         | synchronous                                    |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Summary:
+	inferred   1 Finite State Machine(s).
+Unit <pl330_dma_fifo> synthesized.
+
+Synthesizing Unit <dma_fifo>.
+    Related source file is "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/dma_fifo.vhd".
+        RAM_ADDR_WIDTH = 3
+        FIFO_DWIDTH = 32
+    Found 8x32-bit dual-port RAM <Mram_data_fifo> for signal <data_fifo>.
+    Found 3-bit register for signal <rd_addr>.
+    Found 4-bit register for signal <fifo.free_cnt>.
+    Found 1-bit register for signal <empty>.
+    Found 1-bit register for signal <full>.
+    Found 3-bit register for signal <wr_addr>.
+    Found 3-bit adder for signal <wr_addr[2]_GND_9_o_add_2_OUT> created at line 55.
+    Found 3-bit adder for signal <rd_addr[2]_GND_9_o_add_6_OUT> created at line 60.
+    Found 4-bit adder for signal <fifo.free_cnt[3]_GND_9_o_add_7_OUT> created at line 61.
+    Found 4-bit subtractor for signal <GND_9_o_GND_9_o_sub_4_OUT<3:0>> created at line 56.
+    Summary:
+	inferred   1 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  12 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+Unit <dma_fifo> synthesized.
+
+Synthesizing Unit <tx_encoder>.
+    Related source file is "/home/users/code/lab3/hw/zed_lib/edk/pcores/axi_spdif_tx_v1_00_a/hdl/vhdl/tx_encoder.vhd".
+        DATA_WIDTH = 16
+WARNING:Xst:647 - Input <conf_mode> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 9-bit register for signal <clk_cnt>.
+    Found 1-bit register for signal <tick_counter_d1>.
+    Found 1-bit register for signal <tick_counter_d2>.
+    Found 1-bit register for signal <spdif_clk_en>.
+    Found 3-bit register for signal <bufctrl>.
+    Found 1-bit register for signal <sample_data_ack>.
+    Found 1-bit register for signal <channel>.
+    Found 1-bit register for signal <spdif_tx_o>.
+    Found 2-bit register for signal <framest>.
+    Found 8-bit register for signal <frame_cnt>.
+    Found 5-bit register for signal <bit_cnt>.
+    Found 1-bit register for signal <spdif_out>.
+    Found 1-bit register for signal <inv_preamble>.
+    Found 1-bit register for signal <toggle>.
+    Found 1-bit register for signal <valid>.
+    Found 1-bit register for signal <send_audio>.
+    Found 1-bit register for signal <cha_samp_ack>.
+    Found 1-bit register for signal <chb_samp_ack>.
+    Found 5-bit register for signal <par_cnt>.
+    Found 24-bit register for signal <audio>.
+    Found 1-bit register for signal <tick_counter>.
+    Found finite state machine <FSM_1> for signal <bufctrl>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 4                                              |
+    | Clock              | up_clk (rising_edge)                           |
+    | Reset              | resetn_conf_txdata_OR_8_o (positive)           |
+    | Reset type         | synchronous                                    |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_2> for signal <framest>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 15                                             |
+    | Inputs             | 4                                              |
+    | Outputs            | 4                                              |
+    | Clock              | up_clk (rising_edge)                           |
+    | Reset              | resetn_conf_txen_OR_9_o (positive)             |
+    | Reset type         | synchronous                                    |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 9-bit adder for signal <clk_cnt[8]_GND_10_o_add_1_OUT> created at line 171.
+    Found 5-bit adder for signal <bit_cnt[4]_GND_10_o_add_81_OUT> created at line 347.
+    Found 8-bit adder for signal <frame_cnt[7]_GND_10_o_add_83_OUT> created at line 361.
+    Found 6-bit adder for signal <n0230> created at line 374.
+    Found 5-bit adder for signal <par_cnt[4]_GND_10_o_add_114_OUT> created at line 391.
+    Found 5-bit subtractor for signal <GND_10_o_GND_10_o_sub_100_OUT<4:0>> created at line 118.
+    Found 8x3-bit Read Only RAM for signal <_n0486>
+    Found 1-bit 24-to-1 multiplexer for signal <GND_10_o_X_10_o_Mux_100_o> created at line 118.
+    Found 1-bit 27-to-1 multiplexer for signal <GND_10_o_X_10_o_Mux_113_o> created at line 390.
+    Found 1-bit 3-to-1 multiplexer for signal <framest[1]_inv_preamble_Mux_121_o> created at line 250.
+    Found 9-bit comparator lessequal for signal <clk_cnt[8]_GND_10_o_LessThan_1_o> created at line 170
+    Found 5-bit comparator greater for signal <bit_cnt[4]_PWR_11_o_LessThan_81_o> created at line 346
+    Found 8-bit comparator greater for signal <frame_cnt[7]_PWR_11_o_LessThan_83_o> created at line 360
+    Found 5-bit comparator greater for signal <bit_cnt[4]_GND_10_o_LessThan_93_o> created at line 370
+    Found 5-bit comparator greater for signal <GND_10_o_bit_cnt[4]_LessThan_97_o> created at line 117
+    Found 5-bit comparator greater for signal <bit_cnt[4]_PWR_11_o_LessThan_99_o> created at line 117
+    Summary:
+	inferred   1 RAM(s).
+	inferred   6 Adder/Subtractor(s).
+	inferred  65 D-type flip-flop(s).
+	inferred   6 Comparator(s).
+	inferred  45 Multiplexer(s).
+	inferred   2 Finite State Machine(s).
+Unit <tx_encoder> synthesized.
+
+Synthesizing Unit <axi_ctrlif>.
+    Related source file is "/home/users/code/lab3/hw/zed_lib/edk/pcores/adi_common_v1_00_a/hdl/vhdl/axi_ctrlif.vhd".
+        C_NUM_REG = 4
+        C_S_AXI_DATA_WIDTH = 32
+        C_S_AXI_ADDR_WIDTH = 32
+        C_FAMILY = "virtex6"
+WARNING:Xst:647 - Input <S_AXI_AWADDR<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_WSTRB> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_ARADDR<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <S_AXI_ARADDR<31:4>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 2-bit register for signal <rd_addr>.
+    Found 2-bit register for signal <wr_state>.
+    Found 2-bit register for signal <rd_state>.
+    Found finite state machine <FSM_3> for signal <wr_state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 6                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 3                                              |
+    | Clock              | S_AXI_ACLK (rising_edge)                       |
+    | Reset              | S_AXI_ARESETN_INV_87_o (positive)              |
+    | Reset type         | synchronous                                    |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+INFO:Xst:1799 - State ack is never reached in FSM <rd_state>.
+    Found finite state machine <FSM_4> for signal <rd_state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 6                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 3                                              |
+    | Clock              | S_AXI_ACLK (rising_edge)                       |
+    | Reset              | S_AXI_ARESETN_INV_87_o (positive)              |
+    | Reset type         | synchronous                                    |
+    | Reset State        | idle                                           |
+    | Power Up State     | idle                                           |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Summary:
+	inferred   2 D-type flip-flop(s).
+	inferred   2 Finite State Machine(s).
+Unit <axi_ctrlif> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 2
+ 8x3-bit single-port Read Only RAM                     : 1
+ 8x32-bit dual-port RAM                                : 1
+# Adders/Subtractors                                   : 10
+ 3-bit adder                                           : 2
+ 4-bit adder                                           : 1
+ 4-bit subtractor                                      : 1
+ 5-bit adder                                           : 2
+ 5-bit subtractor                                      : 1
+ 6-bit adder                                           : 1
+ 8-bit adder                                           : 1
+ 9-bit adder                                           : 1
+# Registers                                            : 26
+ 1-bit register                                        : 14
+ 2-bit register                                        : 2
+ 24-bit register                                       : 1
+ 3-bit register                                        : 2
+ 32-bit register                                       : 2
+ 4-bit register                                        : 1
+ 5-bit register                                        : 2
+ 8-bit register                                        : 1
+ 9-bit register                                        : 1
+# Comparators                                          : 6
+ 5-bit comparator greater                              : 4
+ 8-bit comparator greater                              : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 50
+ 1-bit 2-to-1 multiplexer                              : 39
+ 1-bit 24-to-1 multiplexer                             : 1
+ 1-bit 27-to-1 multiplexer                             : 1
+ 1-bit 3-to-1 multiplexer                              : 1
+ 16-bit 2-to-1 multiplexer                             : 1
+ 32-bit 3-to-1 multiplexer                             : 1
+ 4-bit 2-to-1 multiplexer                              : 2
+ 5-bit 2-to-1 multiplexer                              : 2
+ 8-bit 2-to-1 multiplexer                              : 2
+# FSMs                                                 : 5
+# Xors                                                 : 7
+ 1-bit xor2                                            : 7
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <dma_fifo>.
+The following registers are absorbed into counter <rd_addr>: 1 register on signal <rd_addr>.
+The following registers are absorbed into counter <wr_addr>: 1 register on signal <wr_addr>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_data_fifo> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 32-bit                     |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to internal node          | high     |
+    |     addrA          | connected to signal <wr_addr>       |          |
+    |     diA            | connected to signal <in_data>       |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 8-word x 32-bit                     |          |
+    |     addrB          | connected to signal <rd_addr>       |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <dma_fifo> synthesized (advanced).
+
+Synthesizing (advanced) Unit <tx_encoder>.
+The following registers are absorbed into counter <par_cnt>: 1 register on signal <par_cnt>.
+The following registers are absorbed into counter <clk_cnt>: 1 register on signal <clk_cnt>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0486> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 3-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(bit_cnt<1:0>,"0")> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <tx_encoder> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 2
+ 8x3-bit single-port distributed Read Only RAM         : 1
+ 8x32-bit dual-port distributed RAM                    : 1
+# Adders/Subtractors                                   : 6
+ 3-bit adder                                           : 1
+ 4-bit adder                                           : 1
+ 4-bit subtractor                                      : 1
+ 5-bit adder                                           : 1
+ 5-bit subtractor                                      : 1
+ 8-bit adder                                           : 1
+# Counters                                             : 4
+ 3-bit up counter                                      : 2
+ 5-bit up counter                                      : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 123
+ Flip-Flops                                            : 123
+# Comparators                                          : 6
+ 5-bit comparator greater                              : 4
+ 8-bit comparator greater                              : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 50
+ 1-bit 2-to-1 multiplexer                              : 39
+ 1-bit 24-to-1 multiplexer                             : 1
+ 1-bit 27-to-1 multiplexer                             : 1
+ 1-bit 3-to-1 multiplexer                              : 1
+ 16-bit 2-to-1 multiplexer                             : 1
+ 32-bit 3-to-1 multiplexer                             : 1
+ 4-bit 2-to-1 multiplexer                              : 2
+ 5-bit 2-to-1 multiplexer                              : 2
+ 8-bit 2-to-1 multiplexer                              : 2
+# FSMs                                                 : 5
+# Xors                                                 : 7
+ 1-bit xor2                                            : 7
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <audio_0> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_1> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_2> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_3> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_4> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_5> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_6> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <audio_7> (without init value) has a constant value of 0 in block <tx_encoder>. This FF/Latch will be trimmed during the optimization process.
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <axi_spdif_tx_0/FSM_0> on signal <state[1:2]> with user encoding.
+---------------------
+ State   | Encoding
+---------------------
+ idle    | 00
+ request | 01
+ waiting | 10
+ flush   | 11
+---------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <axi_spdif_tx_0/ctrlif/FSM_3> on signal <wr_state[1:2]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ idle  | 00
+ resp  | 01
+ ack   | 10
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <axi_spdif_tx_0/ctrlif/FSM_4> on signal <rd_state[1:1]> with sequential encoding.
+-------------------
+ State | Encoding
+-------------------
+ idle  | 0
+ resp  | 1
+ ack   | unreached
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <axi_spdif_tx_0/TENC/FSM_1> on signal <bufctrl[1:3]> with user encoding.
+----------------------
+ State    | Encoding
+----------------------
+ idle     | 000
+ read_cha | 001
+ read_chb | 010
+ cha_rdy  | 011
+ chb_rdy  | 100
+----------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <axi_spdif_tx_0/TENC/FSM_2> on signal <framest[1:2]> with user encoding.
+-------------------------
+ State       | Encoding
+-------------------------
+ idle        | 00
+ block_start | 01
+ channel_a   | 10
+ channel_b   | 11
+-------------------------
+WARNING:Xst:2677 - Node <par_cnt_1> of sequential type is unconnected in block <tx_encoder>.
+WARNING:Xst:2677 - Node <par_cnt_2> of sequential type is unconnected in block <tx_encoder>.
+WARNING:Xst:2677 - Node <par_cnt_3> of sequential type is unconnected in block <tx_encoder>.
+WARNING:Xst:2677 - Node <par_cnt_4> of sequential type is unconnected in block <tx_encoder>.
+
+Optimizing unit <system_axi_spdif_tx_0_wrapper> ...
+
+Optimizing unit <axi_spdif_tx> ...
+
+Optimizing unit <axi_ctrlif> ...
+
+Optimizing unit <dma_fifo> ...
+
+Optimizing unit <tx_encoder> ...
+WARNING:Xst:1293 - FF/Latch <axi_spdif_tx_0/TENC/clk_cnt_8> has a constant value of 0 in block <system_axi_spdif_tx_0_wrapper>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/fifo.free_cnt_3> in Unit <system_axi_spdif_tx_0_wrapper> is equivalent to the following FF/Latch, which will be removed : <axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/empty> 
+INFO:Xst:3203 - The FF/Latch <axi_spdif_tx_0/TENC/valid> in Unit <system_axi_spdif_tx_0_wrapper> is the opposite to the following FF/Latch, which will be removed : <axi_spdif_tx_0/TENC/send_audio> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 0) on block system_axi_spdif_tx_0_wrapper, actual ratio is 0.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 138
+ Flip-Flops                                            : 138
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : system_axi_spdif_tx_0_wrapper.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 197
+#      GND                         : 1
+#      INV                         : 7
+#      LUT1                        : 7
+#      LUT2                        : 16
+#      LUT3                        : 33
+#      LUT4                        : 44
+#      LUT5                        : 11
+#      LUT6                        : 57
+#      MUXCY                       : 7
+#      MUXF7                       : 5
+#      VCC                         : 1
+#      XORCY                       : 8
+# FlipFlops/Latches                : 138
+#      FD                          : 8
+#      FDE                         : 2
+#      FDR                         : 36
+#      FDRE                        : 90
+#      FDS                         : 1
+#      FDSE                        : 1
+# RAMS                             : 7
+#      RAM32M                      : 5
+#      RAM32X1D                    : 2
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 7z020clg484-1 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             138  out of  106400     0%  
+ Number of Slice LUTs:                  199  out of  53200     0%  
+    Number used as Logic:               175  out of  53200     0%  
+    Number used as Memory:               24  out of  17400     0%  
+       Number used as RAM:               24
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    226
+   Number with an unused Flip Flop:      88  out of    226    38%  
+   Number with an unused LUT:            27  out of    226    11%  
+   Number of fully used LUT-FF pairs:   111  out of    226    49%  
+   Number of unique control sets:        23
+
+IO Utilization: 
+ Number of IOs:                         198
+ Number of bonded IOBs:                   0  out of    200     0%  
+
+Specific Feature Utilization:
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+-------------------------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)                                 | Load  |
+-----------------------------------+-------------------------------------------------------+-------+
+DMA_REQ_ACLK                       | NONE(axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2)| 2     |
+S_AXI_ACLK                         | NONE(axi_spdif_tx_0/config_reg_31)                    | 141   |
+spdif_data_clk                     | NONE(axi_spdif_tx_0/TENC/spdif_tx_o)                  | 2     |
+-----------------------------------+-------------------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -1
+
+   Minimum period: 3.023ns (Maximum Frequency: 330.797MHz)
+   Minimum input arrival time before clock: 1.753ns
+   Maximum output required time after clock: 1.123ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'DMA_REQ_ACLK'
+  Clock period: 1.099ns (frequency: 909.918MHz)
+  Total number of paths / destination ports: 4 / 2
+-------------------------------------------------------------------------
+Delay:               1.099ns (Levels of Logic = 1)
+  Source:            axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 (FF)
+  Destination:       axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 (FF)
+  Source Clock:      DMA_REQ_ACLK rising
+  Destination Clock: DMA_REQ_ACLK rising
+
+  Data Path: axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 to axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              3   0.282   0.753  axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 (axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2)
+     LUT6:I0->O            1   0.053   0.000  axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2-In (axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2-In)
+     FDR:D                     0.011          axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2
+    ----------------------------------------
+    Total                      1.099ns (0.346ns logic, 0.753ns route)
+                                       (31.5% logic, 68.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'S_AXI_ACLK'
+  Clock period: 3.023ns (frequency: 330.797MHz)
+  Total number of paths / destination ports: 1272 / 251
+-------------------------------------------------------------------------
+Delay:               3.023ns (Levels of Logic = 4)
+  Source:            axi_spdif_tx_0/chstatus_reg_1 (FF)
+  Destination:       axi_spdif_tx_0/TENC/par_cnt_0 (FF)
+  Source Clock:      S_AXI_ACLK rising
+  Destination Clock: S_AXI_ACLK rising
+
+  Data Path: axi_spdif_tx_0/chstatus_reg_1 to axi_spdif_tx_0/TENC/par_cnt_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             2   0.282   0.745  axi_spdif_tx_0/chstatus_reg_1 (axi_spdif_tx_0/chstatus_reg_1)
+     LUT6:I0->O            1   0.053   0.602  axi_spdif_tx_0/TENC/Mmux_par_vector<26>24 (axi_spdif_tx_0/TENC/Mmux_par_vector<26>23)
+     LUT6:I3->O            2   0.053   0.419  axi_spdif_tx_0/TENC/Mmux_par_vector<26>25 (axi_spdif_tx_0/TENC/par_vector<26>)
+     LUT6:I5->O            1   0.053   0.000  axi_spdif_tx_0/TENC/Mmux_GND_10_o_X_10_o_Mux_113_o_3 (axi_spdif_tx_0/TENC/Mmux_GND_10_o_X_10_o_Mux_113_o_3)
+     MUXF7:I1->O           1   0.217   0.399  axi_spdif_tx_0/TENC/Mmux_GND_10_o_X_10_o_Mux_113_o_2_f7 (axi_spdif_tx_0/TENC/GND_10_o_X_10_o_Mux_113_o)
+     FDRE:CE                   0.200          axi_spdif_tx_0/TENC/par_cnt_0
+    ----------------------------------------
+    Total                      3.023ns (0.858ns logic, 2.165ns route)
+                                       (28.4% logic, 71.6% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'spdif_data_clk'
+  Clock period: 1.012ns (frequency: 988.142MHz)
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Delay:               1.012ns (Levels of Logic = 0)
+  Source:            axi_spdif_tx_0/TENC/tick_counter (FF)
+  Destination:       axi_spdif_tx_0/TENC/tick_counter (FF)
+  Source Clock:      spdif_data_clk rising
+  Destination Clock: spdif_data_clk rising
+
+  Data Path: axi_spdif_tx_0/TENC/tick_counter to axi_spdif_tx_0/TENC/tick_counter
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              2   0.282   0.405  axi_spdif_tx_0/TENC/tick_counter (axi_spdif_tx_0/TENC/tick_counter)
+     FDR:R                     0.325          axi_spdif_tx_0/TENC/tick_counter
+    ----------------------------------------
+    Total                      1.012ns (0.607ns logic, 0.405ns route)
+                                       (60.0% logic, 40.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'DMA_REQ_ACLK'
+  Total number of paths / destination ports: 10 / 4
+-------------------------------------------------------------------------
+Offset:              0.805ns (Levels of Logic = 2)
+  Source:            DMA_REQ_DAVALID (PAD)
+  Destination:       axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd1 (FF)
+  Destination Clock: DMA_REQ_ACLK rising
+
+  Data Path: DMA_REQ_DAVALID to axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT2:I0->O            1   0.053   0.602  axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd1-In_SW0 (N4)
+     LUT6:I3->O            1   0.053   0.000  axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd1-In (axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd1-In)
+     FDR:D                     0.011          axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd1
+    ----------------------------------------
+    Total                      0.805ns (0.203ns logic, 0.602ns route)
+                                       (25.2% logic, 74.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'S_AXI_ACLK'
+  Total number of paths / destination ports: 555 / 299
+-------------------------------------------------------------------------
+Offset:              1.753ns (Levels of Logic = 3)
+  Source:            S_AXI_AWADDR<3> (PAD)
+  Destination:       axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/fifo.free_cnt_3 (FF)
+  Destination Clock: S_AXI_ACLK rising
+
+  Data Path: S_AXI_AWADDR<3> to axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/fifo.free_cnt_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LUT6:I0->O            5   0.053   0.752  axi_spdif_tx_0/tx_fifo_stb1 (axi_spdif_tx_0/tx_fifo_stb)
+     LUT6:I1->O            2   0.053   0.491  axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/GND_9_o_fifo.free_cnt[3]_equal_11_o31 (axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/GND_9_o_fifo.free_cnt[3]_equal_11_o_bdd5)
+     LUT4:I2->O            1   0.053   0.000  axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/fifo.free_cnt[3]_fifo.free_cnt[3]_mux_9_OUT<2>2 (axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/fifo.free_cnt[3]_fifo.free_cnt[3]_mux_9_OUT<2>)
+     FDR:D                     0.011          axi_spdif_tx_0/pl330_dma_gen.fifo/fifo/fifo.free_cnt_2
+    ----------------------------------------
+    Total                      1.753ns (0.510ns logic, 1.243ns route)
+                                       (29.1% logic, 70.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'spdif_data_clk'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              0.951ns (Levels of Logic = 1)
+  Source:            S_AXI_ARESETN (PAD)
+  Destination:       axi_spdif_tx_0/TENC/spdif_tx_o (FF)
+  Destination Clock: spdif_data_clk rising
+
+  Data Path: S_AXI_ARESETN to axi_spdif_tx_0/TENC/spdif_tx_o
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     INV:I->O             68   0.067   0.559  axi_spdif_tx_0/S_AXI_ARESETN_inv1_INV_0 (axi_spdif_tx_0/S_AXI_ARESETN_inv)
+     FDR:R                     0.325          axi_spdif_tx_0/TENC/spdif_tx_o
+    ----------------------------------------
+    Total                      0.951ns (0.392ns logic, 0.559ns route)
+                                       (41.2% logic, 58.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'S_AXI_ACLK'
+  Total number of paths / destination ports: 133 / 37
+-------------------------------------------------------------------------
+Offset:              1.123ns (Levels of Logic = 1)
+  Source:            axi_spdif_tx_0/ctrlif/rd_addr_1 (FF)
+  Destination:       S_AXI_RDATA<31> (PAD)
+  Source Clock:      S_AXI_ACLK rising
+
+  Data Path: axi_spdif_tx_0/ctrlif/rd_addr_1 to S_AXI_RDATA<31>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             32   0.282   0.788  axi_spdif_tx_0/ctrlif/rd_addr_1 (axi_spdif_tx_0/ctrlif/rd_addr_1)
+     LUT4:I0->O            0   0.053   0.000  axi_spdif_tx_0/Mmux_rd_data110 (S_AXI_RDATA<0>)
+    ----------------------------------------
+    Total                      1.123ns (0.335ns logic, 0.788ns route)
+                                       (29.8% logic, 70.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'DMA_REQ_ACLK'
+  Total number of paths / destination ports: 3 / 2
+-------------------------------------------------------------------------
+Offset:              0.834ns (Levels of Logic = 1)
+  Source:            axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 (FF)
+  Destination:       DMA_REQ_DRTYPE<1> (PAD)
+  Source Clock:      DMA_REQ_ACLK rising
+
+  Data Path: axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 to DMA_REQ_DRTYPE<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              3   0.282   0.499  axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2 (axi_spdif_tx_0/pl330_dma_gen.fifo/state_FSM_FFd2)
+     LUT2:I0->O            0   0.053   0.000  axi_spdif_tx_0/pl330_dma_gen.fifo/state_drtype<1>1 (DMA_REQ_DRTYPE<1>)
+    ----------------------------------------
+    Total                      0.834ns (0.335ns logic, 0.499ns route)
+                                       (40.2% logic, 59.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'spdif_data_clk'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              0.282ns (Levels of Logic = 0)
+  Source:            axi_spdif_tx_0/TENC/spdif_tx_o (FF)
+  Destination:       spdif_tx_o (PAD)
+  Source Clock:      spdif_data_clk rising
+
+  Data Path: axi_spdif_tx_0/TENC/spdif_tx_o to spdif_tx_o
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              0   0.282   0.000  axi_spdif_tx_0/TENC/spdif_tx_o (axi_spdif_tx_0/TENC/spdif_tx_o)
+    ----------------------------------------
+    Total                      0.282ns (0.282ns logic, 0.000ns route)
+                                       (100.0% logic, 0.0% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock DMA_REQ_ACLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+DMA_REQ_ACLK   |    1.099|         |         |         |
+S_AXI_ACLK     |    1.117|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock S_AXI_ACLK
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+S_AXI_ACLK     |    3.023|         |         |         |
+spdif_data_clk |    0.698|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock spdif_data_clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+S_AXI_ACLK     |    0.725|         |         |         |
+spdif_data_clk |    1.012|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 6.14 secs
+ 
+--> 
+
+
+Total memory usage is 532876 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   32 (   0 filtered)
+Number of infos    :   11 (   0 filtered)
+

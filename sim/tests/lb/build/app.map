@@ -15,13 +15,13 @@ LOAD /afs/ir.stanford.edu/class/ee180/labs/lab3/mips_cc/mips_tc/bin/../lib/gcc/m
 .text           0x0000000000000000    0x10000
                 0x0000000000000000                . = 0x0
  *(.boot)
- .boot          0x0000000000000000       0x84 build/./lb.S.o
+ .boot          0x0000000000000000       0x80 build/./lb.S.o
                 0x0000000000000000                boot
  *(.*text.startup)
  *(.*text*)
- .text          0x0000000000000084        0x0 build/./lb.S.o
+ .text          0x0000000000000080        0x0 build/./lb.S.o
                 0x0000000000010000                . = 0x10000
- *fill*         0x0000000000000084     0xff7c 
+ *fill*         0x0000000000000080     0xff80 
 
 .MIPS.abiflags  0x0000000000010000       0x18
  .MIPS.abiflags

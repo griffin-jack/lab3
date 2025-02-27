@@ -1,0 +1,6 @@
+the_ROM_image:
+{
+	[bootloader]zed_fsbl.elf
+	/home/users/code/lab3/hw/zed/implementation/system.bit
+	u-boot.elf
+}

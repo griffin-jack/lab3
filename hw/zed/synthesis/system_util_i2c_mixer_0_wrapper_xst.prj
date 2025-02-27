@@ -1,0 +1,2 @@
+vhdl util_i2c_mixer_v1_00_a /home/users/code/lab3/hw/zed_lib/edk/pcores/util_i2c_mixer_v1_00_a/hdl/vhdl/util_i2c_mixer.vhd
+vhdl work ../hdl/system_util_i2c_mixer_0_wrapper.vhd

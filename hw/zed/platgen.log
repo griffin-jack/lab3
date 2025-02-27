@@ -1,0 +1,295 @@
+Release 14.7 - platgen Xilinx EDK 14.7 Build EDK_P.20131013
+ (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Command Line: platgen -p xc7z020clg484-1 -lang verilog -intstyle default -lp
+/home/users/code/lab3/hw/zed_lib/ -msg __xps/ise/xmsgprops.lst system.mhs 
+
+Parse /home/users/code/lab3/hw/zed/system.mhs ...
+
+Read MPD definitions ...
+WARNING:EDK - IPNAME: clock_generator, INSTANCE: clock_generator_0 -
+   Pre-Production version not verified on hardware for architecture 'zynq' -
+   /home/users/code/lab3/hw/zed/system.mhs line 253 
+WARNING:EDK - IPNAME: clock_generator, INSTANCE: clock_generator_0 -
+   Pre-Production version not verified on hardware for architecture 'zynq' -
+   /home/users/code/lab3/hw/zed/system.mhs line 253 
+
+Overriding IP level properties ...
+INFO:EDK - IPNAME: processing_system7, INSTANCE:processing_system7_0 - tcl is
+   overriding PARAMETER C_S_AXI_HP0_HIGHADDR value to 0x1FFFFFFF -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/processing_system7
+   _v4_03_a/data/processing_system7_v2_1_0.mpd line 300 
+INFO:EDK - IPNAME: processing_system7, INSTANCE:processing_system7_0 - tcl is
+   overriding PARAMETER C_S_AXI_HP1_HIGHADDR value to 0x1FFFFFFF -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/processing_system7
+   _v4_03_a/data/processing_system7_v2_1_0.mpd line 304 
+INFO:EDK - IPNAME: processing_system7, INSTANCE:processing_system7_0 - tcl is
+   overriding PARAMETER C_S_AXI_HP2_HIGHADDR value to 0x1FFFFFFF -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/processing_system7
+   _v4_03_a/data/processing_system7_v2_1_0.mpd line 308 
+INFO:EDK - IPNAME: processing_system7, INSTANCE:processing_system7_0 - tcl is
+   overriding PARAMETER C_S_AXI_HP3_HIGHADDR value to 0x1FFFFFFF -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/processing_system7
+   _v4_03_a/data/processing_system7_v2_1_0.mpd line 312 
+INFO:EDK - IPNAME: processing_system7, INSTANCE:processing_system7_0 - tcl is
+   overriding PARAMETER C_NUM_F2P_INTR_INPUTS value to 4 -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/processing_system7
+   _v4_03_a/data/processing_system7_v2_1_0.mpd line 319 
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:gp_interconnect - tcl is
+   overriding PARAMETER C_BASEFAMILY value to zynq -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 81 
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:se_src_interconnect - tcl is
+   overriding PARAMETER C_BASEFAMILY value to zynq -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 81 
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:se_dst_interconnect - tcl is
+   overriding PARAMETER C_BASEFAMILY value to zynq -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 81 
+INFO:EDK - IPNAME: axi_dma, INSTANCE:axi_dma_stream - tcl is overriding
+   PARAMETER C_M_AXIS_MM2S_PROTOCOL value to GENERIC -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 150 
+INFO:EDK - IPNAME: axi_dma, INSTANCE:axi_dma_stream - tcl is overriding
+   PARAMETER C_S_AXIS_S2MM_PROTOCOL value to GENERIC -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 151 
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:se_control_interconnect - tcl is
+   overriding PARAMETER C_BASEFAMILY value to zynq -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 81 
+
+Computing clock values...
+INFO:EDK - Frequency for Top-Level Input Clock 'processing_system7_0_PS_CLK' is
+   not specified. Clock DRCs will not be performed for IPs connected to that
+   clock port, unless they are connected through the clock generator IP. 
+
+
+Performing IP level DRCs on properties...
+
+Running DRC Tcl procedures for OPTION IPLEVEL_DRC_PROC...
+INFO:EDK - INFO: DDR Base and High address in current configuration is
+   0x00000000 and 0x1FFFFFFF respectively. 
+INFO:EDK - INFO: You can modify the DDR address range accessed by Programmable
+   Logic through the processing_system7 AXI slave interfaces. If MicroBlaze is a
+   master on processing_system7 AXI slave interfaces, please use the top half of
+   the address range (Base Address = 0x10000000; High Address = 0x1FFFFFFF). For
+   all other master, any subset of the DDR address can be used. See Xilinx
+   Answer 47167 for more information. 
+Address Map for Processor processing_system7_0
+  (0x41600000-0x4160ffff) axi_iic_0	gp_interconnect
+  (0x41640000-0x4164ffff) axi_iic_1	gp_interconnect
+  (0x75c00000-0x75c0ffff) axi_spdif_tx_0	gp_interconnect
+  (0x77600000-0x7760ffff) axi_i2s_adi_0	gp_interconnect
+  (0x80400000-0x8040ffff) axi_dma_stream	se_control_interconnect
+  (0xbfc00000-0xbfc0ffff) stream_engine_0	se_control_interconnect
+
+Checking platform address map ...
+
+Checking platform configuration ...
+IPNAME: axi_interconnect, INSTANCE: gp_interconnect - 1 master(s) : 4 slave(s) 
+IPNAME: axi_interconnect, INSTANCE: se_src_interconnect - 1 master(s) : 1
+slave(s) 
+IPNAME: axi_interconnect, INSTANCE: se_dst_interconnect - 1 master(s) : 1
+slave(s) 
+IPNAME: axi_interconnect, INSTANCE: se_control_interconnect - 1 master(s) : 2
+slave(s) 
+
+Checking port drivers...
+WARNING:EDK - PORT: s_axis_s2mm_tuser, CONNECTOR: stream_engine_0_M_AXIS_TUSER -
+   No driver found. Port will be driven to GND -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 259 
+WARNING:EDK - PORT: s_axis_s2mm_tid, CONNECTOR: stream_engine_0_M_AXIS_TID - No
+   driver found. Port will be driven to GND -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 260 
+WARNING:EDK - PORT: s_axis_s2mm_tdest, CONNECTOR: stream_engine_0_M_AXIS_TDEST -
+   No driver found. Port will be driven to GND -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 261 
+WARNING:EDK - PORT: hdmi_int, CONNECTOR: hdmi_int - floating connection -
+   /home/users/code/lab3/hw/zed/system.mhs line 27 
+WARNING:EDK - PORT: util_vector_logic_0_Op1_pin, CONNECTOR:
+   net_util_vector_logic_0_Op1_pin - floating connection -
+   /home/users/code/lab3/hw/zed/system.mhs line 30 
+WARNING:EDK - PORT: int_1_pin, CONNECTOR: int_1 - floating connection -
+   /home/users/code/lab3/hw/zed/system.mhs line 41 
+WARNING:EDK - PORT: int_2_pin, CONNECTOR: int_2 - floating connection -
+   /home/users/code/lab3/hw/zed/system.mhs line 42 
+WARNING:EDK - PORT: int_3_pin, CONNECTOR: int_3 - floating connection -
+   /home/users/code/lab3/hw/zed/system.mhs line 43 
+WARNING:EDK - PORT: int_4_pin, CONNECTOR: int_4 - floating connection -
+   /home/users/code/lab3/hw/zed/system.mhs line 44 
+WARNING:EDK - PORT: mm2s_prmry_reset_out_n, CONNECTOR: RESET_OUT_N - floating
+   connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 221 
+WARNING:EDK - PORT: mm2s_cntrl_reset_out_n, CONNECTOR: RESET_OUT_N - floating
+   connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 230 
+WARNING:EDK - PORT: s2mm_prmry_reset_out_n, CONNECTOR: RESET_OUT_N - floating
+   connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 253 
+WARNING:EDK - PORT: s2mm_sts_reset_out_n, CONNECTOR: RESET_OUT_N - floating
+   connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 262 
+WARNING:EDK - PORT: m_axis_mm2s_tkeep, CONNECTOR:
+   axi_dma_stream_M_AXIS_MM2S_TKEEP - floating connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 223 
+WARNING:EDK - PORT: m_axis_mm2s_tuser, CONNECTOR:
+   axi_dma_stream_M_AXIS_MM2S_TUSER - floating connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 227 
+WARNING:EDK - PORT: m_axis_mm2s_tid, CONNECTOR: axi_dma_stream_M_AXIS_MM2S_TID -
+   floating connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 228 
+WARNING:EDK - PORT: m_axis_mm2s_tdest, CONNECTOR:
+   axi_dma_stream_M_AXIS_MM2S_TDEST - floating connection -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_dma_v6_03_a/da
+   ta/axi_dma_v2_1_0.mpd line 229 
+
+Performing Clock DRCs...
+
+Performing Reset DRCs...
+
+Overriding system level properties...
+
+INFO: Setting C_RANGE_CHECK = ON for axi_interconnect gp_interconnect.
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:gp_interconnect - tcl is
+   overriding PARAMETER C_RANGE_CHECK value to 1 -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 149 
+
+INFO: Setting C_RANGE_CHECK = OFF for axi_interconnect se_src_interconnect; no
+DECERR checking will be performed.
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:se_src_interconnect - tcl is
+   overriding PARAMETER C_RANGE_CHECK value to 0 -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 149 
+
+INFO: Setting C_RANGE_CHECK = OFF for axi_interconnect se_dst_interconnect; no
+DECERR checking will be performed.
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:se_dst_interconnect - tcl is
+   overriding PARAMETER C_RANGE_CHECK value to 0 -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 149 
+
+INFO: Setting C_RANGE_CHECK = ON for axi_interconnect se_control_interconnect.
+INFO:EDK - IPNAME: axi_interconnect, INSTANCE:se_control_interconnect - tcl is
+   overriding PARAMETER C_RANGE_CHECK value to 1 -
+   /cad/xilinx/14.7/ISE_DS/EDK/hw/XilinxProcessorIPLib/pcores/axi_interconnect_v
+   1_06_a/data/axi_interconnect_v2_1_0.mpd line 149 
+
+Running system level update procedures...
+
+Running UPDATE Tcl procedures for OPTION SYSLEVEL_UPDATE_PROC...
+
+Running system level DRCs...
+
+Performing System level DRCs on properties...
+
+Running DRC Tcl procedures for OPTION SYSLEVEL_DRC_PROC...
+
+Running UPDATE Tcl procedures for OPTION PLATGEN_SYSLEVEL_UPDATE_PROC...
+INFO: No asynchronous clock conversions in axi_interconnect gp_interconnect.
+INFO: No asynchronous clock conversions in axi_interconnect se_src_interconnect.
+INFO: No asynchronous clock conversions in axi_interconnect se_dst_interconnect.
+INFO: No asynchronous clock conversions in axi_interconnect
+se_control_interconnect.
+
+Modify defaults ...
+
+Creating stub ...
+
+Processing licensed instances ...
+Completion time: 0.00 seconds
+
+Creating hardware output directories ...
+
+Managing hardware (BBD-specified) netlist files ...
+
+Managing cache ...
+
+Elaborating instances ...
+IPNAME:clock_generator INSTANCE:clock_generator_0 -
+/home/users/code/lab3/hw/zed/system.mhs line 253 - elaborating IP
+ClkGen elaborate status: PASSED
+----------------------------------------
+----------------------------------------
+
+Writing HDL for elaborated instances ...
+
+Inserting wrapper level ...
+Completion time: 1.00 seconds
+
+Constructing platform-level connectivity ...
+Completion time: 0.00 seconds
+
+Writing (top-level) BMM ...
+
+Writing (top-level and wrappers) HDL ...
+
+Generating synthesis project file ...
+
+Running XST synthesis ...
+
+INFO:EDK - The following instances are synthesized with XST. The MPD option
+   IMP_NETLIST=TRUE indicates that a NGC file is to be produced using XST
+   synthesis. IMP_NETLIST=FALSE (default) instances are not synthesized. 
+INSTANCE:processing_system7_0 - /home/users/code/lab3/hw/zed/system.mhs line 55
+- Running XST synthesis
+INSTANCE:gp_interconnect - /home/users/code/lab3/hw/zed/system.mhs line 208 -
+Running XST synthesis
+INSTANCE:axi_spdif_tx_0 - /home/users/code/lab3/hw/zed/system.mhs line 216 -
+Running XST synthesis
+INSTANCE:axi_iic_0 - /home/users/code/lab3/hw/zed/system.mhs line 237 - Running
+XST synthesis
+INSTANCE:clock_generator_0 - /home/users/code/lab3/hw/zed/system.mhs line 253 -
+Running XST synthesis
+INSTANCE:util_vector_logic_0 - /home/users/code/lab3/hw/zed/system.mhs line 263
+- Running XST synthesis
+INSTANCE:axi_i2s_adi_0 - /home/users/code/lab3/hw/zed/system.mhs line 272 -
+Running XST synthesis
+INSTANCE:util_i2c_mixer_0 - /home/users/code/lab3/hw/zed/system.mhs line 307 -
+Running XST synthesis
+INSTANCE:axi_iic_1 - /home/users/code/lab3/hw/zed/system.mhs line 320 - Running
+XST synthesis
+INSTANCE:se_src_interconnect - /home/users/code/lab3/hw/zed/system.mhs line 332
+- Running XST synthesis
+INSTANCE:se_dst_interconnect - /home/users/code/lab3/hw/zed/system.mhs line 339
+- Running XST synthesis
+INSTANCE:axi_dma_stream - /home/users/code/lab3/hw/zed/system.mhs line 346 -
+Running XST synthesis
+INSTANCE:se_control_interconnect - /home/users/code/lab3/hw/zed/system.mhs line
+374 - Running XST synthesis
+INSTANCE:stream_engine_0 - /home/users/code/lab3/hw/zed/system.mhs line 382 -
+Running XST synthesis
+
+Running NGCBUILD ...
+IPNAME:system_gp_interconnect_wrapper INSTANCE:gp_interconnect -
+/home/users/code/lab3/hw/zed/system.mhs line 208 - Running NGCBUILD
+IPNAME:system_clock_generator_0_wrapper INSTANCE:clock_generator_0 -
+/home/users/code/lab3/hw/zed/system.mhs line 253 - Running NGCBUILD
+IPNAME:system_se_src_interconnect_wrapper INSTANCE:se_src_interconnect -
+/home/users/code/lab3/hw/zed/system.mhs line 332 - Running NGCBUILD
+IPNAME:system_se_dst_interconnect_wrapper INSTANCE:se_dst_interconnect -
+/home/users/code/lab3/hw/zed/system.mhs line 339 - Running NGCBUILD
+IPNAME:system_axi_dma_stream_wrapper INSTANCE:axi_dma_stream -
+/home/users/code/lab3/hw/zed/system.mhs line 346 - Running NGCBUILD
+IPNAME:system_se_control_interconnect_wrapper INSTANCE:se_control_interconnect -
+/home/users/code/lab3/hw/zed/system.mhs line 374 - Running NGCBUILD
+INFO:EDK - NCF files should not be modified as they will be regenerated.
+   If any constraint needs to be overridden, this should be done by modifying
+   the data/system.ucf file.
+
+Rebuilding cache ...
+
+Total run time: 838.00 seconds

@@ -1,0 +1,16 @@
+/home/users/code/lab3/hw/zed/implementation/system.ngc 1740640908
+/home/users/code/lab3/hw/zed/implementation/system_processing_system7_0_wrapper.ngc 1740640055
+/home/users/code/lab3/hw/zed/implementation/system_util_vector_logic_0_wrapper.ngc 1740640105
+/home/users/code/lab3/hw/zed/implementation/system_axi_i2s_adi_0_wrapper.ngc 1740640116
+/home/users/code/lab3/hw/zed/implementation/system_gp_interconnect_wrapper.ngc 1740640849
+/home/users/code/lab3/hw/zed/implementation/system_se_control_interconnect_wrapper.ngc 1740640874
+/home/users/code/lab3/hw/zed/implementation/system_se_src_interconnect_wrapper.ngc 1740640859
+/home/users/code/lab3/hw/zed/implementation/system_se_dst_interconnect_wrapper.ngc 1740640864
+/home/users/code/lab3/hw/zed/implementation/system_axi_spdif_tx_0_wrapper.ngc 1740640074
+/home/users/code/lab3/hw/zed/implementation/system_axi_dma_stream_wrapper.ngc 1740640869
+/home/users/code/lab3/hw/zed/implementation/system_stream_engine_0_wrapper.ngc 1740640844
+/home/users/code/lab3/hw/zed/implementation/system_clock_generator_0_wrapper.ngc 1740640854
+/home/users/code/lab3/hw/zed/implementation/system_axi_iic_0_wrapper.ngc 1740640089
+/home/users/code/lab3/hw/zed/implementation/system_axi_iic_1_wrapper.ngc 1740640139
+/home/users/code/lab3/hw/zed/implementation/system_util_i2c_mixer_0_wrapper.ngc 1740640124
+OK

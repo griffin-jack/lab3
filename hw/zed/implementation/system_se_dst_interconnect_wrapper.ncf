@@ -1,0 +1,3 @@
+INST "se_dst_interconnect/*clock_conv*/*_resync*" TNM = FFS "se_dst_interconnect_reset_resync";
+TIMEGRP "se_dst_interconnect_reset_source" = FFS PADS CPUS;
+TIMESPEC "TS_se_dst_interconnect_reset_resync" = FROM "se_dst_interconnect_reset_source" TO "se_dst_interconnect_reset_resync" TIG;

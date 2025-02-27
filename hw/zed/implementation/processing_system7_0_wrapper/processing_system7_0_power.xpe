@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE POWERDATA PUBLIC "POWERDATA" "POWERDATA.dtd" >
+<POWERDATA author="XPS" dataVersion="2012.3" design="system" >
+  <BLOCKDETAILS >
+    <CORE name="PS_Module" provider="XPS" content="WhiteBox" >
+      <BLOCKTYPE name="PS7" >
+        <PS7 >
+          <PROCESSOR name="system" numA9Cores="2" clockFreq="666.666666" load="0.5" />
+          <MEMORY name="code" memType="DDR3" dataWidth="32" clockFreq="533.333333" readRate="0.5" writeRate="0.5" />
+          <GPIO interface="GPIO_Bank_1" ioStandard="LVCMOS33" bidis="6" ioBank="Vcco_p1" clockFreq="1" usageRate="0.5" />
+          <GPIO interface="GPIO_Bank_0" ioStandard="LVCMOS33" bidis="9" ioBank="Vcco_p0" clockFreq="1" usageRate="0.5" />
+          <GPIO interface="SPI" ioStandard="" bidis="1" ioBank="" clockFreq="166.666672" usageRate="0.5" />
+          <GPIO interface="SPI" ioStandard="" bidis="0" ioBank="" clockFreq="166.666672" usageRate="0.5" />
+          <GPIO interface="UART" ioStandard="LVCMOS33" bidis="2" ioBank="Vcco_p1" clockFreq="100.000000" usageRate="0.5" />
+          <GPIO interface="SD" ioStandard="LVCMOS33" bidis="6" ioBank="Vcco_p1" clockFreq="125.000000" usageRate="0.5" />
+          <GPIO interface="USB" ioStandard="LVCMOS33" bidis="12" ioBank="Vcco_p1" clockFreq="60" usageRate="0.5" />
+          <GPIO interface="GigE" ioStandard="LVCMOS33" bidis="12" ioBank="Vcco_p1" clockFreq="125.000000" usageRate="0.5" />
+          <GPIO interface="QSPI" ioStandard="LVCMOS33" bidis="7" ioBank="Vcco_p0" clockFreq="200" usageRate="0.5" />
+          <PLL domain="Processor" vco="1333.333374" />
+          <PLL domain="Memory" vco="1066.666748" />
+          <PLL domain="IO" vco="1000.000000" />
+        </PS7>
+      </BLOCKTYPE>
+    </CORE>
+  </BLOCKDETAILS>
+</POWERDATA>

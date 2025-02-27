@@ -1,0 +1,11 @@
+Image rows:  162
+Image columns:  640
+Instruction Memory: tests/sobel_asm/build/app.hex
+WARNING: harness/userlogic_test.v:63: $readmemh(tests/sobel_asm/build/app.hex): Too many words in the file for the requested range [0:16383].
+Input Data Buffer: tests/sobel_asm/ibuf.hex
+Output buffer: tests/sobel_asm/obuf_test.hex
+  Dumping range: 0x000000000 - 0x000019500
+Running userlogic for maximum of 10000000 cycles
+Userlogic ran for 4775655 cycles
+status register = 1
+test register = 0

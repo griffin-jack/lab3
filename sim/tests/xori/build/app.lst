@@ -15,8 +15,12 @@ Disassembly of section .text:
       1c:	354ae7c8 	ori	t2,t2,0xe7c8
       20:	01095826 	xor	t3,t0,t1
       24:	014b6026 	xor	t4,t2,t3
-      28:	ae0c0004 	sw	t4,4(s0)
-      2c:	ae110000 	sw	s1,0(s0)
-      30:	0800000c 	j	30 <boot+0x30>
-      34:	00000000 	nop
+      28:	380d0001 	xori	t5,zero,0x1
+      2c:	39ae0001 	xori	t6,t5,0x1
+      30:	39cf0001 	xori	t7,t6,0x1
+      34:	01ec7824 	and	t7,t7,t4
+      38:	ae0f0004 	sw	t7,4(s0)
+      3c:	ae110000 	sw	s1,0(s0)
+      40:	08000010 	j	40 <boot+0x40>
+      44:	00000000 	nop
 	...
