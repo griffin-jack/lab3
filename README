@@ -1,1 +1,18 @@
-TODO: Write your lab report here. See the handout for more information.
+Group: Jack Griffin, Graham Shunk
+
+Instructions Implemented: add, addi, addiu, addu, and, andi, beq, bgez,bgtz, blez, bltz, bne, j, jal, jalr, jr, lb, lbu, lh, ll, lui, lw, movn, movz, mul, nor, or, ori, sb, sc, sh, sll, sllv, slt, slti, sltiu, sltu, sra, srav, srl, srlv, sub, subu, sw, xor, xori
+
+Changes Made:
+
+ALU.V
+
+DECODE.V
+Implemented branch comparison and resolution logic and calculated branch addresses.  Forwarded branches and jumps to IF stage.  Updated logic for ALU operands to accommodate new instructions.  Completed forwarding logic for rs and rt.  Updated ALU opcode calculation.  Adjusted stalling for memory dependencies.
+
+INSTRUCTION_FETCH.V
+Enabled branches with no stalling by resolving the next program counter address using the branch signals from the decode step within a single cycle.
+
+MIPS_CPU.V
+Connected forwarded jump and branching signals between decode and IF steps.  Updated logic connecting data read from memory to load instruction write-back, sign-extending when necessary, using correct endianness conventions, and adding pipelined signals to control data size from a memory read.
+
+MIPS_DEFINES.V
