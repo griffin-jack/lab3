@@ -305,7 +305,7 @@ module decode (
                    (op == `SC) ? 1'b0 : atomic_ex;
 
     // 'mem_sc_mask_id' is high when a store conditional should not store
-    assign mem_sc_mask_id = 1'b0;
+    //assign mem_sc_mask_id = 1'b0;
     assign mem_sc_mask_id = (op == `SC) ? ~atomic_ex : 1'b0;
 
    
