@@ -5,14 +5,16 @@ Instructions Implemented: add, addi, addiu, addu, and, andi, beq, bgez,bgtz, ble
 Changes Made:
 
 ALU.V
+Added new alu operations for instructions such as NOR, MUL, and SRA. Used signed operands for certain operations such as ADD, SUB, and MUL.
 
 DECODE.V
-Implemented branch comparison and resolution logic and calculated branch addresses.  Forwarded branches and jumps to IF stage.  Updated logic for ALU operands to accommodate new instructions.  Completed forwarding logic for rs and rt.  Updated ALU opcode calculation.  Adjusted stalling for memory dependencies.
+Implemented branch comparison and resolution logic and calculated branch addresses.  Forwarded branches and jumps to IF stage.  Updated logic for ALU operands to accommodate new instructions.  Completed forwarding logic for rs and rt.  Updated ALU opcode calculation.  Adjusted stalling for memory dependencies. Correctly assigned signals to keep track of loads and stores for ll and sc.
 
 INSTRUCTION_FETCH.V
-Enabled branches with no stalling by resolving the next program counter address using the branch signals from the decode step within a single cycle.
+Enabled branches with no stalling by resolving the next program counter address using the branch signals from the decode step within a single cycle. Simplified wire logic so as to only pass in one jump signal instead of a signal for j, jr, and jal each. 
 
 MIPS_CPU.V
 Connected forwarded jump and branching signals between decode and IF steps.  Updated logic connecting data read from memory to load instruction write-back, sign-extending when necessary, using correct endianness conventions, and adding pipelined signals to control data size from a memory read.
 
 MIPS_DEFINES.V
+Added the lh opcode
