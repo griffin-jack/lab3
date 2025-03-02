@@ -16,6 +16,16 @@ module alu (
 );
 
 
+
+//Questions
+// - How to load modules?
+// - can I copy fpga.img directly from farmshare ssh to zedboard ssh?
+// - what is your_prog.hex and app.hex?
+// - is baxter avi already on zedboard?
+
+// - what FPS do we want for the video, and how to check what it is?
+
+
 // add   - DONE, VERIFIED with more robust test
 // addi  - DONE, VERIFIED with more robust test
 // addiu - DONE, VERIFIED with more robust test
@@ -34,14 +44,14 @@ module alu (
 // jr    - DONE, VERIFIED
 // lb    - DONE, VERIFIED
 // lbu   - DONE, VERIFIED
-// lh    - DONE,
+// lh    - DONE, VERIFIED
 // ll    - DONE, VERIFIED 
 // lui   - DONE, VERIFIED
 // lw    - DONE, VERIFIED
 // movn  - DONE, VERIFIED
 // movz  - DONE, VERIFIED
 // mul   - DONE, VERIFIED
-// nor   - DONE
+// nor   - DONE, VERIFIED
 // or    - DONE, VERIFIED
 // ori   - DONE, VERIFIED 
 // sb    - DONE, VERIFIED
